@@ -7,6 +7,7 @@
         {
             InitializeComponent();
             _appShell = Provider.ServiceProvider.GetService<AppShell>();
+            Application.Current.UserAppTheme = AppTheme.Light;
             MainPage = _appShell;
         }
     }

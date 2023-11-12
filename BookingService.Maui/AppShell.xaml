@@ -6,15 +6,26 @@
     xmlns:local="clr-namespace:BookingService.Maui"
     Shell.FlyoutBehavior="Disabled"
     xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
-    x:DataType="viewmodel:App.AppShellViewModel">
+    x:DataType="viewmodel:App.AppShellViewModel"
+    Shell.NavBarIsVisible="False">
     <TabBar>
-        <Tab Title="Strona główna">
+        <Tab Icon="house_solid.svg">
             <ShellContent Title="Strona główna" 
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="MainPage" />
         </Tab>
-        <Tab Title="Książki">
-            <ShellContent Title="Książki" 
+        <Tab Icon="magnifying_glass_solid.svg">
+            <ShellContent Title="Usługi" 
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+        <Tab Icon="calendar_days_solid.svg">
+            <ShellContent Title="Wizyty" 
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+        <Tab Icon="user_solid.svg">
+            <ShellContent Title="Użytkownik" 
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="MainPage" />
         </Tab>
