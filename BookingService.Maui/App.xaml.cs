@@ -2,11 +2,12 @@
 {
     public partial class App : Application
     {
+        private readonly AppShell _appShell;
         public App()
         {
             InitializeComponent();
-
-            MainPage = new AppShell();
+            _appShell = Provider.ServiceProvider.GetService<AppShell>();
+            MainPage = _appShell;
         }
     }
 }

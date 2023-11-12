@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using BookingService.Maui.ViewModel.App;
+using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 
 namespace BookingService.Maui
 {
@@ -9,17 +11,20 @@ namespace BookingService.Maui
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
+            builder.Services.AddScoped<AppShell>();
+            builder.Services.AddScoped<AppShellViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
-            return builder.Build();
+            var app = builder.Build();
+            Provider.ServiceProvider.Initialize(app.Services);
+            return app;
         }
     }
 }

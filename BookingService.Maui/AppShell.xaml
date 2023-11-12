@@ -4,11 +4,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:BookingService.Maui"
-    Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
+    Shell.FlyoutBehavior="Disabled"
+    xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+    x:DataType="viewmodel:App.AppShellViewModel">
+    <TabBar>
+        <Tab Title="Strona główna">
+            <ShellContent Title="Strona główna" 
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+        <Tab Title="Książki">
+            <ShellContent Title="Książki" 
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+    </TabBar>
 </Shell>
