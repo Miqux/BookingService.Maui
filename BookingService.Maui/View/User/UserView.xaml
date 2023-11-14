@@ -10,5 +10,6 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button Text="Dodaj książke" Command="{Binding TempCommand}"/>
     </VerticalStackLayout>
 </ContentPage>

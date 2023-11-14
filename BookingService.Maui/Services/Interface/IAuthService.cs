@@ -1,8 +1,10 @@
-﻿namespace BookingService.Maui.Services.Interface
+﻿using BookingService.Maui.Model;
+
+namespace BookingService.Maui.Services.Interface
 {
     public interface IAuthService
     {
         public Task<bool> IsLogged();
-        public Task<string> Login(string login, string password);
+        public Task<ResultModel<bool>> Login(string login, string password);
     }
 }
