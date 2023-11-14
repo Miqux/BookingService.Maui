@@ -61,7 +61,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="View\" />
+	  <MauiXaml Update="View\User\LoginView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\User\UserView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Repository\Interface\" />
+	  <Folder Include="Repository\Repository\" />
+	  <Folder Include="View\Service\" />
 	</ItemGroup>
 
 </Project>

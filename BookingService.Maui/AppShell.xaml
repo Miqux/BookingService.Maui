@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:BookingService.Maui"
     Shell.FlyoutBehavior="Disabled"
     xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+    xmlns:view="clr-namespace:BookingService.Maui.View"
     x:DataType="viewmodel:App.AppShellViewModel"
     Shell.NavBarIsVisible="False">
     <TabBar>
@@ -26,8 +27,8 @@
         </Tab>
         <Tab Icon="user_solid.svg">
             <ShellContent Title="Użytkownik" 
-                ContentTemplate="{DataTemplate local:MainPage}"
-                Route="MainPage" />
+                ContentTemplate="{DataTemplate view:User.UserView}"
+                Route="UserPage" />
         </Tab>
     </TabBar>
 </Shell>

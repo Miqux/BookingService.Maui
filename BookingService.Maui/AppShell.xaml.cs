@@ -1,4 +1,5 @@
-﻿using BookingService.Maui.ViewModel.App;
+﻿using BookingService.Maui.View.User;
+using BookingService.Maui.ViewModel.App;
 
 namespace BookingService.Maui
 {
@@ -10,6 +11,9 @@ namespace BookingService.Maui
             InitializeComponent();
             _appShellViewModel = appShellViewModel;
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(LoginView), typeof(LoginView));
+            Routing.RegisterRoute(nameof(UserView), typeof(UserView));
+            BindingContext = _appShellViewModel;
         }
     }
 }
