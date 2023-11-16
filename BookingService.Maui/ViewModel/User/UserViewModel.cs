@@ -14,10 +14,10 @@ namespace BookingService.Maui.ViewModel.User
             this.addressService = addressService;
         }
         [RelayCommand]
-        private void Temp()
+        private async void Temp()
         {
-            var temp = userService.Login("", "");
-            var temp2 = addressService.GetAll();
+            var temp = await userService.Login("test1234", "test1234");
+            var temp2 = await addressService.GetAll();
         }
     }
 }

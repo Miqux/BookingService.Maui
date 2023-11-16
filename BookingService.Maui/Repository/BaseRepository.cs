@@ -3,9 +3,11 @@
     public class BaseRepository
     {
         public HttpClient HttpClient;
+        private readonly IHttpClientFactory httpClientFactory = Provider.ServiceProvider.GetService<IHttpClientFactory>();
+
         public BaseRepository()
         {
-            HttpClient = new HttpClient();
+            HttpClient = httpClientFactory.CreateClient("BookingServiceApi");
         }
     }
 }

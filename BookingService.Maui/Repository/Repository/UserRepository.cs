@@ -17,10 +17,9 @@ namespace BookingService.Maui.Repository.Repository
                 Login = login,
                 Password = password
             };
-            string apiUrl = HttpClient.BaseAddress + "User/Login";
             try
             {
-                HttpResponseMessage response = await HttpClient.PostAsJsonAsync(apiUrl, loginModel);
+                HttpResponseMessage response = await HttpClient.PostAsJsonAsync("User/Login", loginModel);
                 return response;
             }
             catch (Exception ex)

@@ -57,7 +57,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
@@ -71,6 +71,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Repository\Interface\" />
+	  <Folder Include="Repository\Repository\" />
 	  <Folder Include="View\Service\" />
 	</ItemGroup>
 

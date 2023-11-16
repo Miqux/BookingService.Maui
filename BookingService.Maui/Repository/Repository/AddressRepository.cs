@@ -6,10 +6,9 @@ namespace BookingService.Maui.Repository.Repository
     {
         public async Task<HttpResponseMessage?> GetAll()
         {
-            string apiUrl = HttpClient.BaseAddress + "Address";
             try
             {
-                HttpResponseMessage response = await HttpClient.GetAsync(apiUrl);
+                HttpResponseMessage response = await HttpClient.GetAsync("Address");
                 return response;
             }
             catch (Exception ex)

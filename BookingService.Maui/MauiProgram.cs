@@ -7,7 +7,6 @@ using BookingService.Maui.View.User;
 using BookingService.Maui.ViewModel.App;
 using BookingService.Maui.ViewModel.User;
 using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
 
 namespace BookingService.Maui
 {
@@ -24,15 +23,13 @@ namespace BookingService.Maui
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            builder.Services.AddScoped(sp =>
+            builder.Services.AddSingleton<JwtAuthHandler>();
+            builder.Services.AddHttpClient("BookingServiceApi", client =>
             {
-                HttpClient httpClient = new(new JwtAuthHandler())
-                {
-                    BaseAddress = new Uri("https://localhost:7146/api/"),
-                    Timeout = TimeSpan.FromSeconds(20)
-                };
-                return httpClient;
-            });
+                client.BaseAddress = new Uri("http://10.0.2.2:5233/api/");
+                client.Timeout = TimeSpan.FromSeconds(20);
+            }).ConfigurePrimaryHttpMessageHandler<JwtAuthHandler>();
+
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<AppShellViewModel>();
             builder.Services.AddTransient<UserView>();
@@ -46,9 +43,6 @@ namespace BookingService.Maui
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
 
-#if DEBUG
-            builder.Logging.AddDebug();
-#endif
             var app = builder.Build();
             Provider.ServiceProvider.Initialize(app.Services);
             return app;
