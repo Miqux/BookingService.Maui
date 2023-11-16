@@ -6,5 +6,6 @@ namespace BookingService.Maui.Services.Interface
     {
         public Task<bool> IsLogged();
         public Task<ResultModel<bool>> Login(string login, string password);
+        public Task<bool> Logout();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BookingService.Maui.Services.Interface;
+using BookingService.Maui.View.User;
 using CommunityToolkit.Mvvm.Input;
 
 namespace BookingService.Maui.ViewModel.User
@@ -14,10 +15,9 @@ namespace BookingService.Maui.ViewModel.User
             this.addressService = addressService;
         }
         [RelayCommand]
-        private async void Temp()
+        private async Task Temp()
         {
-            var temp = await userService.Login("test1234", "test1234");
-            var temp2 = await addressService.GetAll();
+            await Shell.Current.GoToAsync(nameof(LoginView));
         }
     }
 }

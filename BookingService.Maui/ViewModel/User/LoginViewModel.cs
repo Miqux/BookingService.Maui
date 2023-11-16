@@ -1,6 +1,10 @@
 ﻿namespace BookingService.Maui.ViewModel.User
 {
-    public class LoginViewModel
+    public partial class LoginViewModel : BaseViewModel
     {
+        public LoginViewModel()
+        {
+
+        }
     }
 }

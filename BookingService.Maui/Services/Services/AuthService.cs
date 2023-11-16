@@ -41,5 +41,10 @@ namespace BookingService.Maui.Services.Services
             else
                 return new ResultModel<bool>(false, response.ReasonPhrase != null ? response.ReasonPhrase.ToString() : "", false);
         }
+
+        public async Task<bool> Logout()
+        {
+            return await Task.Run(() => SecureStorage.Default.Remove("jwtToken"));
+        }
     }
 }
