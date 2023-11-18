@@ -5,11 +5,29 @@
              Title="LoginView"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
-             x:DataType="viewmodel:User.LoginViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:DataType="viewmodel:User.LoginViewModel"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+
+        <Label Text="Zaloguj" FontSize="32" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center"/>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Login" Keyboard="Email" FontSize="16" HeightRequest="40" Text="{Binding Login}"/>
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Hasło" IsPassword="True" FontSize="16" HeightRequest="40" Text="{Binding Password}"/>
+        </Frame>
+
+        <Button Text="Zaloguj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                HeightRequest="50" Margin="0,0,0,10" Command="{Binding LoginButtonClickCommand}"/>
+
+        <Label Text="Nie masz jeszcze konta?" TextColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding RegisteryButtonClickCommand}"/>
+            </Label.GestureRecognizers>
+        </Label>
+
+    </StackLayout>
 </ContentPage>

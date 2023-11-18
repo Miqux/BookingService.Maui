@@ -32,8 +32,10 @@ namespace BookingService.Maui
 
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<AppShellViewModel>();
+
             builder.Services.AddTransient<UserView>();
             builder.Services.AddTransient<UserViewModel>();
+
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<LoginView>();
 
@@ -42,6 +44,7 @@ namespace BookingService.Maui
 
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IDialogService, DialogService>();
 
             var app = builder.Build();
             Provider.ServiceProvider.Initialize(app.Services);

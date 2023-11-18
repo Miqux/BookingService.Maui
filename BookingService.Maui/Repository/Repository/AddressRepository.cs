@@ -11,7 +11,7 @@ namespace BookingService.Maui.Repository.Repository
                 HttpResponseMessage response = await HttpClient.GetAsync("Address");
                 return response;
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
