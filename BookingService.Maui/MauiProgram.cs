@@ -39,6 +39,9 @@ namespace BookingService.Maui
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<LoginView>();
 
+            builder.Services.AddTransient<RegisteryViewModel>();
+            builder.Services.AddTransient<RegisteryView>();
+
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
 

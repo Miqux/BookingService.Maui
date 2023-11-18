@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.User.RegisteryView"
+             Title="RegisteryView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:User.RegisteryViewModel"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+
+        <Label Text="Rejestracja" FontSize="32" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center"/>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Imię" FontSize="16" HeightRequest="40" Text="{Binding FirstName}"/>
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Nazwisko" FontSize="16" HeightRequest="40" Text="{Binding LastName}"/>
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Login" FontSize="16" HeightRequest="40" Text="{Binding Login}"/>
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Hasło" IsPassword="True" FontSize="16" HeightRequest="40" Text="{Binding Password}"/>
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Email" Keyboard="Email" FontSize="16" HeightRequest="40" Text="{Binding Email}"/>
+        </Frame>
+
+        <Button Text="Zarejestruj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                HeightRequest="50" Margin="0,0,0,10" Command="{Binding RegisterButtonClickCommand}"/>
+
+        <Label Text="Masz już konto?" TextColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center">
+            <Label.GestureRecognizers>
+            </Label.GestureRecognizers>
+        </Label>
+
+    </StackLayout>
+
+</ContentPage>

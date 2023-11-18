@@ -1,4 +1,5 @@
 ﻿using BookingService.Maui.Services.Interface;
+using BookingService.Maui.View.User;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel.DataAnnotations;
@@ -37,6 +38,7 @@ namespace BookingService.Maui.ViewModel.User
         [RelayCommand]
         public async Task RegisteryButtonClick()
         {
+            await Shell.Current.GoToAsync(nameof(RegisteryView));
         }
         private Tuple<bool, string> Validate()
         {
