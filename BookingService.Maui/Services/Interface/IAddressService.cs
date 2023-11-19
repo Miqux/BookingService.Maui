@@ -1,5 +1,5 @@
 ﻿using BookingService.Maui.Model;
-using BookingService.Maui.Model.ViewModelResponse;
+using BookingService.Maui.Model.ApiResponse;
 
 namespace BookingService.Maui.Services.Interface
 {

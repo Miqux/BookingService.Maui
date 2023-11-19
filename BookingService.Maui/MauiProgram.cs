@@ -1,4 +1,6 @@
-﻿using BookingService.Maui.Helpers;
+﻿using AutoMapper;
+using BookingService.Maui.Configuration;
+using BookingService.Maui.Helpers;
 using BookingService.Maui.Repository.Interface;
 using BookingService.Maui.Repository.Repository;
 using BookingService.Maui.Services.Interface;
@@ -48,6 +50,13 @@ namespace BookingService.Maui
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IDialogService, DialogService>();
+            SecureStorage.Default.RemoveAll();
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperConfiguration());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
 
             var app = builder.Build();
             Provider.ServiceProvider.Initialize(app.Services);

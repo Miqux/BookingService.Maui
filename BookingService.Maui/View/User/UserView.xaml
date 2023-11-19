@@ -1,15 +1,69 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="BookingService.Maui.View.User.UserView"
              Title="UserView"
              xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
-             x:DataType="viewmodel:User.UserViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Dodaj książke" Command="{Binding TempCommand}"/>
-    </VerticalStackLayout>
+             x:DataType="viewmodel:User.UserViewModel"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <StackLayout Padding="20" Spacing="20" VerticalOptions="Center">
+
+        <!-- Sekcja "Nie jesteś zalogowany" -->
+        <Frame IsVisible="{Binding IsLogged, Converter={StaticResource NegateBooleanConverter}}"
+               BackgroundColor="White" CornerRadius="8" Padding="20" Margin="0,0,0,10">
+            <StackLayout>
+
+                <Label Text="Nie jesteś zalogowany" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" />
+
+                <Button Text="Zaloguj się" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                        HeightRequest="50" Margin="0,20,0,0" Command="{Binding LoginButtonClickCommand}"/>
+            </StackLayout>
+        </Frame>
+
+        <!-- Sekcja "Dane użytkownika" -->
+        <Frame IsVisible="{Binding IsLogged}"
+               BackgroundColor="White" CornerRadius="8" Padding="20">
+            <StackLayout>
+
+                <Label Text="Dane użytkownika" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Imię:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
+                    <Label Text="{Binding Name}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
+
+                    <Label Text="Nazwisko:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                    <Label Text="{Binding LastName}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Text="Login:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                    <Label Text="{Binding Login}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+
+                    <Label Text="Email:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                    <Label Text="{Binding Email}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
+                </Grid>
+
+                <!-- Dodaj dowolne inne informacje o użytkowniku, jeśli są dostępne -->
+                <Button Text="Wyloguj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                        HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
+            </StackLayout>
+        </Frame>
+
+    </StackLayout>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
 </ContentPage>

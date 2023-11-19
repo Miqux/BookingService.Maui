@@ -1,4 +1,4 @@
-﻿namespace BookingService.Maui.Model.ViewModelResponse
+﻿namespace BookingService.Maui.Model.ApiResponse
 {
     public class AddressInListResponse
     {
