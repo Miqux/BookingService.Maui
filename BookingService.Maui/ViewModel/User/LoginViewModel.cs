@@ -20,6 +20,7 @@ namespace BookingService.Maui.ViewModel.User
         [MaxLength(20, ErrorMessage = "Hasło nie może zawierać więcej niż 20 znaków!")]
         [ObservableProperty]
         string password = string.Empty;
+
         #endregion
 
         [RelayCommand]

@@ -25,7 +25,7 @@ namespace BookingService.Maui.ViewModel.User
         [RelayCommand]
         private async Task LogoutButtonClick()
         {
-            await AuthService.Logout();
+            AuthService.Logout();
             await DialogService.ShowAlert("Wylogowano", "Pomyślnie wylogowano");
             await Shell.Current.GoToAsync(nameof(UserView));
         }

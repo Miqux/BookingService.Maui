@@ -1,6 +1,8 @@
 ﻿using BookingService.Maui.Model;
 using BookingService.Maui.Services.Interface;
 
+#nullable disable
+
 namespace BookingService.Maui.Services.Services
 {
     public class DialogService : IDialogService
@@ -26,9 +28,9 @@ namespace BookingService.Maui.Services.Services
             _ = Int32.TryParse(propmtResult, out int value);
             return new ResultModel<int>(true, "", value);
         }
-        public async Task ShowAlert(string title, string message, string cancel = "OK")
+        public Task ShowAlert(string title, string message, string cancel = "OK")
         {
-            await Application.Current.MainPage.DisplayAlert(title, message, cancel);
+            return Application.Current.MainPage.DisplayAlert(title, message, cancel);
         }
     }
 }

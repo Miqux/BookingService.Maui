@@ -60,9 +60,9 @@ namespace BookingService.Maui.Services.Services
                 return new ResultModel<bool>(false, "Nieznany błąd", false);
         }
 
-        public async Task<bool> Logout()
+        public void Logout()
         {
-            return await Task.Run(() => SecureStorage.Default.Remove("jwtToken"));
+            SecureStorage.Default.RemoveAll();
         }
     }
 }
