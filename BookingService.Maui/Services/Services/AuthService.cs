@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BookingService.Maui.Helpers;
 using BookingService.Maui.Model;
+using BookingService.Maui.Model.ApiRequest;
 using BookingService.Maui.Model.ApiResponse;
 using BookingService.Maui.Model.User;
 using BookingService.Maui.Repository.Interface;
@@ -22,7 +23,7 @@ namespace BookingService.Maui.Services.Services
 
         public async Task<User?> GetUserById(int id)
         {
-            var user = await userRepository.GetUserById(id);
+            var user = await userRepository.GetUserByIdAsync(id);
 
             if (!user.Result)
                 return null;
@@ -63,6 +64,17 @@ namespace BookingService.Maui.Services.Services
         public void Logout()
         {
             SecureStorage.Default.RemoveAll();
+        }
+
+        public async Task<ResultModel<bool>> Register(RegisterUser model)
+        {
+            var registerModel = mapper.Map<RegisteryRequest>(model);
+            var registerResult = await userRepository.RegisterAsync(registerModel);
+
+            if (!registerResult.Result)
+                return new ResultModel<bool>(false, registerResult.Message, false);
+
+            return new ResultModel<bool>(true, true);
         }
     }
 }

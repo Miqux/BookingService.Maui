@@ -14,7 +14,7 @@ namespace BookingService.Maui.Repository.Repository
 
         }
 
-        public async Task<ResultModel<UserResponse>> GetUserById(int id)
+        public async Task<ResultModel<UserResponse>> GetUserByIdAsync(int id)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace BookingService.Maui.Repository.Repository
                 if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     return new ResultModel<UserResponse>(false, "Niepoprawne id", new UserResponse());
 
-                var responseData = response.Content.ReadAsStringAsync().Result;
+                var responseData = await response.Content.ReadAsStringAsync();
                 UserResponse? userResponse = JsonConvert.DeserializeObject<UserResponse>(responseData);
 
                 if (userResponse == null)
@@ -57,5 +57,28 @@ namespace BookingService.Maui.Repository.Repository
             }
         }
 
+        public async Task<ResultModel<BaseCommandResponse>> RegisterAsync(RegisteryRequest model)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.PostAsJsonAsync("User", model);
+                if (response == null) return new ResultModel<BaseCommandResponse>(false, "Błąd połączenia z api", new BaseCommandResponse());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                BaseCommandResponse? registeryResponse = JsonConvert.DeserializeObject<BaseCommandResponse>(responseData);
+
+                if (registeryResponse == null)
+                    return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
+
+                if (response.StatusCode == System.Net.HttpStatusCode.UnprocessableEntity)
+                    return new ResultModel<BaseCommandResponse>(false, registeryResponse.Message ?? string.Empty, registeryResponse);
+
+                return new ResultModel<BaseCommandResponse>(true, "Pomyślnie zarejestrowano", registeryResponse);
+            }
+            catch
+            {
+                return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
+            }
+        }
     }
 }
