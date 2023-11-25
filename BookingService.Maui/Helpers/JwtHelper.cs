@@ -14,5 +14,15 @@ namespace BookingService.Maui.Helpers
 
             return -1;
         }
+        public static string ExtractUserRole(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jsonToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
+
+            if (jsonToken != null && jsonToken.Actor != null)
+                return jsonToken.Actor;
+
+            return string.Empty;
+        }
     }
 }

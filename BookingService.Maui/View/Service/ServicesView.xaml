@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.Service.ServicesView"
+             Title="ServicesView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:Service.ServicesViewModel"
+             xmlns:local="clr-namespace:BookingService.Maui.Model.Service"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ServiceTemplate" x:DataType="local:ServiceLight">
+                <Grid Padding="10" BackgroundColor="White" Margin="0,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{Binding ComapnyName}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                    <Label Text="{Binding Name}" FontSize="16" TextColor="Gray" Grid.Row="1" />
+                    <Label Text="{Binding Type}" FontSize="14" TextColor="Gray" Grid.Row="2" />
+                </Grid>
+            </DataTemplate>
+            <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="10">
+        <!-- Dodaj dowolne elementy UI, takie jak SearchBar, przyciski itp., zgodnie z Twoimi potrzebami -->
+
+        <CollectionView ItemsSource="{Binding ServicesList}"
+                        SelectionMode="Single"
+                        ItemTemplate="{StaticResource ServiceTemplate}"
+                        VerticalOptions="FillAndExpand">
+            <CollectionView.Behaviors>
+                <toolkit:EventToCommandBehavior
+                    EventName="SelectionChanged"
+                    Command="{Binding ItemSelectedCommand}"
+                    EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+            </CollectionView.Behaviors>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

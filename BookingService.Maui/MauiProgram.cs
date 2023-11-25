@@ -5,8 +5,10 @@ using BookingService.Maui.Repository.Interface;
 using BookingService.Maui.Repository.Repository;
 using BookingService.Maui.Services.Interface;
 using BookingService.Maui.Services.Services;
+using BookingService.Maui.View.Service;
 using BookingService.Maui.View.User;
 using BookingService.Maui.ViewModel.App;
+using BookingService.Maui.ViewModel.Service;
 using BookingService.Maui.ViewModel.User;
 using CommunityToolkit.Maui;
 
@@ -44,17 +46,28 @@ namespace BookingService.Maui
             builder.Services.AddTransient<RegisteryViewModel>();
             builder.Services.AddTransient<RegisteryView>();
 
+            builder.Services.AddTransient<ServicesView>();
+            builder.Services.AddTransient<ServicesViewModel>();
+
+            builder.Services.AddTransient<CompanyViewModel>();
+            builder.Services.AddTransient<ComapnyView>();
+
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IDialogService, DialogService>();
+            builder.Services.AddScoped<IServiceService, ServiceService>();
+
             SecureStorage.Default.RemoveAll();
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutoMapperConfiguration());
             });
+
             IMapper mapper = mapperConfig.CreateMapper();
             builder.Services.AddSingleton(mapper);
 

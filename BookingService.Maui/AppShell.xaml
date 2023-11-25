@@ -17,7 +17,7 @@
         </Tab>
         <Tab Icon="magnifying_glass_solid.svg">
             <ShellContent Title="Usługi" 
-                ContentTemplate="{DataTemplate local:MainPage}"
+                ContentTemplate="{DataTemplate view:Service.ServicesView}"
                 Route="MainPage" />
         </Tab>
         <Tab Icon="calendar_days_solid.svg">

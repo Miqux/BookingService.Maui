@@ -63,7 +63,8 @@ namespace BookingService.Maui.ViewModel.User
                 LastName = LastName,
                 Login = Login,
                 Password = Password,
-                Email = Email
+                Email = Email,
+                Role = Model.Enums.UserRole.User
             };
 
             var registrationResult = await AuthService.Register(registerModel);

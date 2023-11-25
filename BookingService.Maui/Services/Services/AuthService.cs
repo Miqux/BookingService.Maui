@@ -54,6 +54,7 @@ namespace BookingService.Maui.Services.Services
 
                 await SecureStorage.Default.SetAsync("jwtToken", loginResponse.Token);
                 await SecureStorage.Default.SetAsync("userId", JwtHelper.ExtractUserId(loginResponse.Token).ToString());
+                await SecureStorage.Default.SetAsync("actoreRole", JwtHelper.ExtractUserRole(loginResponse.Token));
 
                 return new ResultModel<bool>(true, "Pomyślnie zalogowano", true);
             }
