@@ -1,4 +1,6 @@
-﻿using BookingService.Maui.View.User;
+﻿using BookingService.Maui.Model.Address;
+using BookingService.Maui.Services.Interface;
+using BookingService.Maui.View.User;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -24,17 +26,18 @@ namespace BookingService.Maui.ViewModel.User
         [ObservableProperty]
         string companyName = string.Empty;
         [ObservableProperty]
-        string city = string.Empty;
-        [ObservableProperty]
-        string street = string.Empty;
-        [ObservableProperty]
-        string zipcode = string.Empty;
-        [ObservableProperty]
-        int houseNumber;
-        [ObservableProperty]
-        int apartmentNumber;
+        Address address = new();
 
         #endregion
+
+        private readonly IAddressService addressService;
+        private readonly ICompanyService companyService;
+
+        public UserViewModel(IAddressService addressService, ICompanyService companyService)
+        {
+            this.addressService = addressService;
+            this.companyService = companyService;
+        }
 
         [RelayCommand]
         private async Task LoginButtonClick()
@@ -52,11 +55,16 @@ namespace BookingService.Maui.ViewModel.User
         private async Task Appearing()
         {
             IsLogged = await AuthService.IsLogged();
-
             if (!IsLogged)
                 return;
 
             await InitUser();
+
+            IsCompanyBoss = await AuthService.IsCompanyBoss();
+            if (!IsCompanyBoss)
+                return;
+
+            await InitCompany();
         }
         private async Task InitUser()
         {
@@ -78,13 +86,18 @@ namespace BookingService.Maui.ViewModel.User
             if (!int.TryParse(userId, out int parsedId))
                 return;
 
-            var user = await AuthService.GetUserById(parsedId);
-            if (user == null) return;
+            var company = await companyService.GetByUserId(parsedId);
 
-            Name = user.Name;
-            LastName = user.LastName;
-            Login = user.Login;
-            Email = user.Email;
+            if (!company.Result)
+                return;
+
+            var address = await addressService.GetById(company.Value.Id);
+
+            if (!address.Result)
+                return;
+
+            CompanyName = company.Value.Name;
+            Address = address.Value;
         }
     }
 }

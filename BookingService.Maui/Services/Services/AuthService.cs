@@ -36,7 +36,11 @@ namespace BookingService.Maui.Services.Services
             string jwtToken = await SecureStorage.Default.GetAsync("jwtToken");
             return !string.IsNullOrEmpty(jwtToken);
         }
-
+        public async Task<bool> IsCompanyBoss()
+        {
+            string jwtToken = await SecureStorage.Default.GetAsync("actoreRole");
+            return !string.IsNullOrEmpty(jwtToken) && jwtToken.Equals("CompanyBoss");
+        }
         public async Task<ResultModel<bool>> Login(string login, string password)
         {
             var response = await userRepository.LoginAsync(login, password);
@@ -46,7 +50,7 @@ namespace BookingService.Maui.Services.Services
                 var loginResponseData = response.Content.ReadAsStringAsync().Result;
                 LoginResponse? loginResponse = JsonConvert.DeserializeObject<LoginResponse>(loginResponseData);
 
-                if (loginResponse == null)
+                if (loginResponse is null)
                     return new ResultModel<bool>(false, "Błąd wewnętrzny", false);
 
                 if (!loginResponse.Success)

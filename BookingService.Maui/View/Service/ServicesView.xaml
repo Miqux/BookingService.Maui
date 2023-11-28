@@ -42,4 +42,7 @@
             </CollectionView.Behaviors>
         </CollectionView>
     </StackLayout>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
 </ContentPage>

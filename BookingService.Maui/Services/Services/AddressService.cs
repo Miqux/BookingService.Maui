@@ -1,4 +1,6 @@
-﻿using BookingService.Maui.Model;
+﻿using AutoMapper;
+using BookingService.Maui.Model;
+using BookingService.Maui.Model.Address;
 using BookingService.Maui.Model.ApiResponse;
 using BookingService.Maui.Repository.Interface;
 using BookingService.Maui.Services.Interface;
@@ -9,10 +11,12 @@ namespace BookingService.Maui.Services.Services
     public class AddressService : IAddressService
     {
         private readonly IAddressRepository addressRepository;
+        private readonly IMapper mapper;
 
-        public AddressService(IAddressRepository addressRepository)
+        public AddressService(IAddressRepository addressRepository, IMapper mapper)
         {
             this.addressRepository = addressRepository;
+            this.mapper = mapper;
         }
 
         public async Task<ResultModel<List<AddressInListResponse>>> GetAll()
@@ -40,6 +44,17 @@ namespace BookingService.Maui.Services.Services
             else
                 return new ResultModel<List<AddressInListResponse>>(false, response.ReasonPhrase != null ? response.ReasonPhrase.ToString() : "", address);
 
+        }
+
+        public async Task<ResultModel<Address>> GetById(int id)
+        {
+            var address = await addressRepository.GetById(id);
+
+            if (!address.Result)
+                return new ResultModel<Address>(false, new Address());
+
+            var mappedAddress = mapper.Map<Address>(address.Value);
+            return new ResultModel<Address>(true, mappedAddress);
         }
     }
 }

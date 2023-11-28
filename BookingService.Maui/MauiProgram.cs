@@ -55,11 +55,13 @@ namespace BookingService.Maui
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+            builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IDialogService, DialogService>();
             builder.Services.AddScoped<IServiceService, ServiceService>();
+            builder.Services.AddScoped<ICompanyService, CompanyService>();
 
             SecureStorage.Default.RemoveAll();
 

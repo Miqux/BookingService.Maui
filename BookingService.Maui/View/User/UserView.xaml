@@ -60,7 +60,52 @@
                         HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
             </StackLayout>
         </Frame>
+        
+        <!-- Sekcja "Dane firmy" -->
+        <Frame IsVisible="{Binding IsCompanyBoss}"
+        BackgroundColor="White" CornerRadius="8" Padding="20">
+            <StackLayout>
 
+                <Label Text="Dane firmy" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Nazwa firmy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
+                    <Label Text="{Binding CompanyName}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
+                    
+                    <Label Text="Miasto:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                    <Label Text="{Binding Address.City}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Text="Ulica:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                    <Label Text="{Binding Address.Street}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+
+                    <Label Text="Kod pocztowy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                    <Label Text="{Binding Address.Zipcode}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
+
+                    <Label Text="Numer budynku:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="4"/>
+                    <Label Text="{Binding Address.HouseNumber}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="4" Grid.Column="1"/>
+                </Grid>
+
+                <!-- Dodaj dowolne inne informacje o użytkowniku, jeśli są dostępne -->
+                <Button Text="Usługi" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                 HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
+                
+                <Button Text="Edytuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                 HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
+            </StackLayout>
+        </Frame>
     </StackLayout>
 
     <ContentPage.Behaviors>
