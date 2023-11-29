@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using BookingService.Maui.Model;
+using System.ComponentModel;
 using System.Reflection;
 
 namespace BookingService.Maui.Helpers
@@ -25,6 +26,19 @@ namespace BookingService.Maui.Helpers
             }
 
             return name;
+        }
+        public static List<IdName> GetListFromEnum<TEnum>() where TEnum : Enum
+        {
+            List<IdName> toReturn = new();
+
+            foreach (TEnum enumValue in Enum.GetValues(typeof(TEnum)))
+            {
+                IdName idName = new();
+                idName.Name = enumValue.GetDescription();
+                idName.Id = Convert.ToInt32(enumValue);
+                toReturn.Add(idName);
+            }
+            return toReturn;
         }
     }
 }

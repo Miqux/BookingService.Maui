@@ -67,7 +67,10 @@
 	  <MauiXaml Update="View\Service\ServicesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\User\ComapnyView.xaml">
+	  <MauiXaml Update="View\User\AddCompanyServiceView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\User\CompanyServicesView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\User\LoginView.xaml">
@@ -79,10 +82,6 @@
 	  <MauiXaml Update="View\User\UserView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ViewModel\Company\" />
 	</ItemGroup>
 
 </Project>

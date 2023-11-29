@@ -30,7 +30,6 @@ namespace BookingService.Maui.Services.Services
 
             return mapper.Map<User>(user.Value);
         }
-
         public async Task<bool> IsLogged()
         {
             string jwtToken = await SecureStorage.Default.GetAsync("jwtToken");
@@ -65,12 +64,10 @@ namespace BookingService.Maui.Services.Services
             else
                 return new ResultModel<bool>(false, "Nieznany błąd", false);
         }
-
         public void Logout()
         {
             SecureStorage.Default.RemoveAll();
         }
-
         public async Task<ResultModel<bool>> Register(RegisterUser model)
         {
             var registerModel = mapper.Map<RegisteryRequest>(model);

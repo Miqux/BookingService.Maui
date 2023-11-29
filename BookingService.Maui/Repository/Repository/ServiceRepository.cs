@@ -1,12 +1,37 @@
 ﻿using BookingService.Maui.Model;
+using BookingService.Maui.Model.ApiRequest.Service;
 using BookingService.Maui.Model.ApiResponse;
+using BookingService.Maui.Model.ApiResponse.Service;
 using BookingService.Maui.Repository.Interface;
 using Newtonsoft.Json;
+using System.Net.Http.Json;
 
 namespace BookingService.Maui.Repository.Repository
 {
     public class ServiceRepository : BaseRepository, IServiceRepository
     {
+        public async Task<ResultModel<List<CompanyServiceResponse>>> GetCompanyServices(int companyId)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync("Service/GetCompanyServices/" + companyId.ToString());
+                if (response == null) return new ResultModel<List<CompanyServiceResponse>>(false, "Błąd połączenia z api",
+                    new List<CompanyServiceResponse>());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                List<CompanyServiceResponse>? servicesResponse = JsonConvert.DeserializeObject<List<CompanyServiceResponse>>(responseData);
+
+                if (servicesResponse == null)
+                    return new ResultModel<List<CompanyServiceResponse>>(false, "Błąd wewnętrzny", new List<CompanyServiceResponse>());
+
+                return new ResultModel<List<CompanyServiceResponse>>(true, servicesResponse);
+            }
+            catch
+            {
+                return new ResultModel<List<CompanyServiceResponse>>(false, "Błąd wewnętrzny", new List<CompanyServiceResponse>());
+            }
+        }
+
         public async Task<ResultModel<List<ServicesLightResponse>>> GetServicesLight()
         {
             try
@@ -26,6 +51,53 @@ namespace BookingService.Maui.Repository.Repository
             catch
             {
                 return new ResultModel<List<ServicesLightResponse>>(false, "Błąd wewnętrzny", new List<ServicesLightResponse>());
+            }
+        }
+        public async Task<ResultModel<BaseCommandResponse>> AddService(AddServiceRequest model)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.PostAsJsonAsync("Service", model);
+                if (response == null) return new ResultModel<BaseCommandResponse>(false, "Błąd połączenia z api", new BaseCommandResponse());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                BaseCommandResponse? registeryResponse = JsonConvert.DeserializeObject<BaseCommandResponse>(responseData);
+
+                if (registeryResponse == null)
+                    return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
+
+                if (response.StatusCode == System.Net.HttpStatusCode.UnprocessableEntity)
+                    return new ResultModel<BaseCommandResponse>(false, registeryResponse.Message ?? string.Empty, registeryResponse);
+
+                return new ResultModel<BaseCommandResponse>(true, "Pomyślnie dodano usługę", registeryResponse);
+            }
+            catch
+            {
+                return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
+            }
+        }
+
+        public async Task<ResultModel<BaseResponse>> DeleteService(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.DeleteAsync("Service/" + id.ToString());
+                if (response == null) return new ResultModel<BaseResponse>(false, "Błąd połączenia z api", new BaseCommandResponse());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                BaseResponse? registeryResponse = JsonConvert.DeserializeObject<BaseResponse>(responseData);
+
+                if (registeryResponse == null)
+                    return new ResultModel<BaseResponse>(false, "Błąd wewnętrzny", new BaseResponse());
+
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    return new ResultModel<BaseResponse>(false, registeryResponse.Message ?? string.Empty, registeryResponse);
+
+                return new ResultModel<BaseResponse>(true, "Pomyślnie usunięto usługę", registeryResponse);
+            }
+            catch
+            {
+                return new ResultModel<BaseResponse>(false, "Błąd wewnętrzny", new BaseResponse());
             }
         }
     }

@@ -15,6 +15,9 @@ namespace BookingService.Maui.Repository.Repository
                 if (response == null) return new ResultModel<CompanyLightResponse>(false, "Błąd połączenia z api",
                     new CompanyLightResponse());
 
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    return new ResultModel<CompanyLightResponse>(false, "Brak firmy", new CompanyLightResponse());
+
                 var responseData = await response.Content.ReadAsStringAsync();
                 CompanyLightResponse? companyResponse = JsonConvert.DeserializeObject<CompanyLightResponse>(responseData);
 

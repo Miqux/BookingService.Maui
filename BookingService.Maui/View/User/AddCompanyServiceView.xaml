@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.User.AddCompanyServiceView"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"   
+             Title="AddCompanyServiceView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:User.AddCompanyServiceViewModel"
+             xmlns:local="clr-namespace:BookingService.Maui.Model.Service"
+             xmlns:enums="clr-namespace:BookingService.Maui.Model"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+
+        <Label Text="Dodaj Usługę" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center"/>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Nazwa usługi" FontSize="16" Text="{Binding Name}" />
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Koszt" Keyboard="Numeric" FontSize="16" Text="{Binding Cost}" />
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Czas trwania (minuty)" Keyboard="Numeric" FontSize="16" Text="{Binding DurationInMinutes}" />
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <controls:Picker SelectedItem="{Binding Type, Mode=TwoWay}" ItemsSource="{Binding Types}">
+                <Picker.ItemDisplayBinding>
+                    <Binding Path="Name" />
+                </Picker.ItemDisplayBinding>
+            </controls:Picker>
+        </Frame>
+
+        <Button Text="Dodaj Usługę" Command="{Binding AddServiceButtonClickCommand}" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8" HeightRequest="50" Margin="0,0,0,10" />
+
+    </StackLayout>
+</ContentPage>

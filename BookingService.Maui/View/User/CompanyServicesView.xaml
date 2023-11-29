@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.User.CompanyServicesView"
+             Title="CompanyServicesView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:User.CompanyServicesViewModel"
+             xmlns:local="clr-namespace:BookingService.Maui.Model.Service"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="CompanyServiceTemplate" x:DataType="local:CompanyService">
+                <ViewCell>
+                    <Grid Padding="10" BackgroundColor="White" Margin="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label
+                            Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}"  />
+                        <Label Grid.Row="1"
+                            Text="{Binding Cost, StringFormat='{}{0} zł'}" FontSize="16" TextColor="Gray"
+                            FontAttributes="Italic" />
+                        <Label Grid.Row="2"
+                            Text="{Binding DurationInMinutes, StringFormat='{}{0} minut'}" FontSize="16" TextColor="Gray"
+                            FontAttributes="Italic"/>
+                        <Label Grid.Row="3"
+                            Text="{Binding Type, Converter={StaticResource DescriptionEnumConverter}}"
+                            FontSize="14" TextColor="Gray"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="10">
+        <Button Text="Dodaj usługe" Command="{Binding AddServiceButtonClickCommand}" HorizontalOptions="End" WidthRequest="200" Margin="10"/>
+
+        <ListView ItemsSource="{Binding ServicesList}"
+                  SeparatorColor="Grey"
+                  SelectionMode="None"
+                  HasUnevenRows="True"
+                  SelectedItem="{Binding SelectedService}"
+                  ItemTemplate="{StaticResource CompanyServiceTemplate}">
+            <ListView.Behaviors>
+                <toolkit:EventToCommandBehavior
+                EventName="ItemSelected"
+                Command="{Binding ItemSelectedCommand}"
+                EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+            </ListView.Behaviors>
+        </ListView>
+    </StackLayout>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+</ContentPage>

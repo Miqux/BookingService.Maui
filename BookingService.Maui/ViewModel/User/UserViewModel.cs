@@ -22,13 +22,15 @@ namespace BookingService.Maui.ViewModel.User
         string email = string.Empty;
 
         [ObservableProperty]
-        bool isCompanyBoss;
+        bool isCompany;
         [ObservableProperty]
         string companyName = string.Empty;
         [ObservableProperty]
         Address address = new();
 
         #endregion
+
+        private int companyId;
 
         private readonly IAddressService addressService;
         private readonly ICompanyService companyService;
@@ -59,12 +61,16 @@ namespace BookingService.Maui.ViewModel.User
                 return;
 
             await InitUser();
-
-            IsCompanyBoss = await AuthService.IsCompanyBoss();
-            if (!IsCompanyBoss)
-                return;
-
             await InitCompany();
+        }
+        [RelayCommand]
+        private async Task CompanyServicesButtonClick()
+        {
+            var temp = new Dictionary<string, object>
+            {
+                { "ComapnyId", companyId }
+            };
+            await Shell.Current.GoToAsync(nameof(CompanyServicesView), temp);
         }
         private async Task InitUser()
         {
@@ -82,15 +88,24 @@ namespace BookingService.Maui.ViewModel.User
         }
         private async Task InitCompany()
         {
+            bool isCompanyBoss = await AuthService.IsCompanyBoss();
+
             string userId = await SecureStorage.Default.GetAsync("userId");
             if (!int.TryParse(userId, out int parsedId))
                 return;
 
             var company = await companyService.GetByUserId(parsedId);
 
-            if (!company.Result)
+            if (!company.Result || company.Value is null || !isCompanyBoss)
+            {
+                IsCompany = false;
                 return;
+            }
 
+            companyId = company.Value.Id;
+            await SecureStorage.Default.SetAsync("companyId", company.Value.Id.ToString());
+
+            IsCompany = true;
             var address = await addressService.GetById(company.Value.Id);
 
             if (!address.Result)

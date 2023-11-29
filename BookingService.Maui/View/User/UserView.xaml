@@ -62,7 +62,7 @@
         </Frame>
         
         <!-- Sekcja "Dane firmy" -->
-        <Frame IsVisible="{Binding IsCompanyBoss}"
+        <Frame IsVisible="{Binding IsCompany}"
         BackgroundColor="White" CornerRadius="8" Padding="20">
             <StackLayout>
 
@@ -100,7 +100,7 @@
 
                 <!-- Dodaj dowolne inne informacje o użytkowniku, jeśli są dostępne -->
                 <Button Text="Usługi" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
-                 HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
+                 HeightRequest="50" Margin="0,20,0,0" Command="{Binding CompanyServicesButtonClickCommand}"/>
                 
                 <Button Text="Edytuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
                  HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>

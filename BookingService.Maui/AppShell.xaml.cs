@@ -16,6 +16,8 @@ namespace BookingService.Maui
             Routing.RegisterRoute(nameof(UserView), typeof(UserView));
             Routing.RegisterRoute(nameof(RegisteryView), typeof(RegisteryView));
             Routing.RegisterRoute(nameof(ServicesView), typeof(ServicesView));
+            Routing.RegisterRoute(nameof(CompanyServicesView), typeof(CompanyServicesView));
+            Routing.RegisterRoute(nameof(AddCompanyServiceView), typeof(AddCompanyServiceView));
             BindingContext = _appShellViewModel;
         }
     }
