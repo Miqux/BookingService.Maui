@@ -24,7 +24,7 @@ namespace BookingService.Maui.Services.Services
             if (!services.Result || services.Value is null)
                 return new ResultModel<List<ServiceLight>>(false, services.Message, new List<ServiceLight>());
 
-            return new ResultModel<List<ServiceLight>>(true, mapper.Map<List<ServiceLight>>(services));
+            return new ResultModel<List<ServiceLight>>(true, mapper.Map<List<ServiceLight>>(services.Value));
         }
         public async Task<ResultModel<List<Model.Service.CompanyService>>> GetCompanyServices(int comapnyId)
         {
@@ -54,6 +54,24 @@ namespace BookingService.Maui.Services.Services
                 return new ResultModel<bool>(false, deleteServiceResponse.Message, false);
 
             return new ResultModel<bool>(true, true);
+        }
+
+        public async Task<ResultModel<ServiceDetails>> GetServiceDetalis(int id)
+        {
+            ServiceDetails service = new()
+            {
+                Name = "Testowa usługa 1",
+                Cost = 100,
+                DurationInMinutes = 60,
+                Type = Enums.ServiceType.BeardTrimming,
+                CompanyName = "Firma1",
+                City = "Warszawa",
+                Street = "Warszawska",
+                Zipcode = "01-221",
+                HouseNumber = 69,
+                ApartmentNumber = 12
+            };
+            return new ResultModel<ServiceDetails>(true, service);
         }
     }
 }

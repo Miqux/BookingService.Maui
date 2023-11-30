@@ -1,5 +1,6 @@
 ﻿using BookingService.Maui.Model.Service;
 using BookingService.Maui.Services.Interface;
+using BookingService.Maui.View.Service;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -8,8 +9,14 @@ namespace BookingService.Maui.ViewModel.Service
 {
     public partial class ServicesViewModel : BaseViewModel
     {
+        private ObservableCollection<ServiceLight> servicesList;
+        public ObservableCollection<ServiceLight> ServicesList
+        {
+            get => servicesList;
+            set => SetProperty(ref servicesList, value);
+        }
         [ObservableProperty]
-        ObservableCollection<ServiceLight>? servicesList;
+        ServiceLight selectedService = new();
 
         private readonly IServiceService serviceService;
 
@@ -25,19 +32,22 @@ namespace BookingService.Maui.ViewModel.Service
         }
         public async Task InitializeData()
         {
-            //var services = serviceService.GetServiceLight().Result.Value;
-            List<ServiceLight> services = new List<ServiceLight>();
-            ServiceLight serviceLight = new ServiceLight() { ComapnyName = "testowa firma", Name = "testowa usługa", Type = Model.Enums.ServiceType.Combo };
-            services.Add(serviceLight);
-            ServiceLight serviceLight2 = new ServiceLight() { ComapnyName = "testowa2 firma2", Name = "testasdowa usługa", Type = Model.Enums.ServiceType.Haircut };
-            services.Add(serviceLight2);
-            ServiceLight serviceLight3 = new ServiceLight() { ComapnyName = "testow3a firma3", Name = "testowa ", Type = Model.Enums.ServiceType.BeardTrimming };
-            services.Add(serviceLight3);
-            ServicesList = new ObservableCollection<ServiceLight>(services);
+            var services = await serviceService.GetServiceLight();
+            ServicesList = new ObservableCollection<ServiceLight>(services.Value);
         }
         [RelayCommand]
         private async Task ItemSelected(object item)
         {
+            if (item is null)
+                return;
+
+            ServiceLight serviceLight = (ServiceLight)item;
+
+            var temp = new Dictionary<string, object>
+            {
+                { "ComapnyId", serviceLight.Id }
+            };
+            await Shell.Current.GoToAsync(nameof(ServiceDetalisView), temp);
         }
     }
 }

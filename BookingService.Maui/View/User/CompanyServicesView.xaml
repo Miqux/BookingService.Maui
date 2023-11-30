@@ -42,7 +42,7 @@
 
         <ListView ItemsSource="{Binding ServicesList}"
                   SeparatorColor="Grey"
-                  SelectionMode="None"
+                  SelectionMode="Single"
                   HasUnevenRows="True"
                   SelectedItem="{Binding SelectedService}"
                   ItemTemplate="{StaticResource CompanyServiceTemplate}">

@@ -19,6 +19,7 @@ namespace BookingService.Maui.Configuration
             CreateMap<UserResponse, User>().ReverseMap();
             CreateMap<RegisterUser, RegisteryRequest>().ReverseMap();
             CreateMap<ServicesLightResponse, ServiceLight>().ReverseMap();
+            CreateMap<ServicesLightResponse, ServiceLight>();
             CreateMap<AddressResponse, Address>().ReverseMap();
             CreateMap<CompanyLightResponse, CompanyLight>().ReverseMap();
             CreateMap<CompanyServiceResponse, CompanyService>().ReverseMap();

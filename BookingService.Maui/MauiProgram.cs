@@ -55,6 +55,9 @@ namespace BookingService.Maui
             builder.Services.AddTransient<AddCompanyServiceView>();
             builder.Services.AddTransient<AddCompanyServiceViewModel>();
 
+            builder.Services.AddTransient<ServiceDetalisView>();
+            builder.Services.AddTransient<ServiceDetalisViewModel>();
+
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IServiceRepository, ServiceRepository>();

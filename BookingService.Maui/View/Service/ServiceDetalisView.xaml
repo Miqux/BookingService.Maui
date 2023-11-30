@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.Service.ServiceDetalisView"
+             Title="ServiceDetalisView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:Service.ServiceDetalisViewModel"
+             xmlns:local="clr-namespace:BookingService.Maui.Model.Service"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <StackLayout>
+        <Frame
+        BackgroundColor="White" CornerRadius="8" Padding="20">
+        <StackLayout>
+                <Label Text="Usługa" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+                <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Nazwa usługi:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
+                <Label Text="{Binding ServiceDetails.Name}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
+
+                <Label Text="Miasto:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                    <Label Text="{Binding ServiceDetails.Cost,  StringFormat='{}{0} zł'}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+
+                <Label Text="Ulica:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                    <Label Text="{Binding ServiceDetails.DurationInMinutes,  StringFormat='{}{0} minut'}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+
+                <Label Text="Kod pocztowy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                <Label Text="{Binding ServiceDetails.Type, Converter={StaticResource DescriptionEnumConverter}}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
+            </Grid>
+        </StackLayout>
+    </Frame>
+    <Frame
+       BackgroundColor="White" CornerRadius="8" Padding="20">
+        <StackLayout>
+                <Label Text="Adres" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+                <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Miasto:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" />
+                <Label Text="{Binding ServiceDetails.City}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
+
+                <Label Text="Ulica:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                <Label Text="{Binding ServiceDetails.Street}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+
+                <Label Text="Numer:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                <Label Text="{Binding ServiceDetails.HouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+
+                <Label Text="Numer lokalu:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                <Label Text="{Binding ServiceDetails.HouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
+    
+                </Grid>
+        </StackLayout>
+    </Frame>
+    </StackLayout>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+</ContentPage>

@@ -11,36 +11,41 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="ServiceTemplate" x:DataType="local:ServiceLight">
-                <Grid Padding="10" BackgroundColor="White" Margin="0,5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <ViewCell>
+                    <Grid Padding="10" BackgroundColor="White" Margin="0,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <Label Text="{Binding ComapnyName}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
-                    <Label Text="{Binding Name}" FontSize="16" TextColor="Gray" Grid.Row="1" />
-                    <Label Text="{Binding Type, Converter={StaticResource DescriptionEnumConverter}}" FontSize="14" TextColor="Gray" Grid.Row="2" />
-                </Grid>
+                        <Label 
+                            Text="{Binding ComapnyName}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}" />
+                        <Label 
+                            Text="{Binding Name}" FontSize="16" TextColor="Gray" Grid.Row="1" />
+                        <Label 
+                            Text="{Binding Type, Converter={StaticResource DescriptionEnumConverter}}" FontSize="14" TextColor="Gray" Grid.Row="2" />
+                    </Grid>
+                </ViewCell>
             </DataTemplate>
             <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <StackLayout Padding="10">
-        <!-- Dodaj dowolne elementy UI, takie jak SearchBar, przyciski itp., zgodnie z Twoimi potrzebami -->
-
-        <CollectionView ItemsSource="{Binding ServicesList}"
-                        SelectionMode="Single"
-                        ItemTemplate="{StaticResource ServiceTemplate}"
-                        VerticalOptions="FillAndExpand">
-            <CollectionView.Behaviors>
+        <ListView ItemsSource="{Binding ServicesList}"
+                  SeparatorColor="Grey"
+                  SelectionMode="Single"
+                  HasUnevenRows="True"
+                  SelectedItem="{Binding SelectedService}"
+                  ItemTemplate="{StaticResource ServiceTemplate}">
+            <ListView.Behaviors>
                 <toolkit:EventToCommandBehavior
-                    EventName="SelectionChanged"
-                    Command="{Binding ItemSelectedCommand}"
-                    EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
-            </CollectionView.Behaviors>
-        </CollectionView>
+                EventName="ItemSelected"
+                Command="{Binding ItemSelectedCommand}"
+                EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}" />
+            </ListView.Behaviors>
+        </ListView>       
     </StackLayout>
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />

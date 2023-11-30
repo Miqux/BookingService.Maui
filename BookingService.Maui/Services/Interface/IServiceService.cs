@@ -9,5 +9,6 @@ namespace BookingService.Maui.Services.Interface
         public Task<ResultModel<List<CompanyService>>> GetCompanyServices(int comapnyId);
         public Task<ResultModel<int?>> AddService(Service model);
         public Task<ResultModel<bool>> DeleteService(int id);
+        public Task<ResultModel<ServiceDetails>> GetServiceDetalis(int id);
     }
 }
