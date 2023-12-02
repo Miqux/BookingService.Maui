@@ -9,7 +9,20 @@ namespace BookingService.Maui.ViewModel.Service
     public partial class ServiceDetalisViewModel : BaseViewModel
     {
         [ObservableProperty]
+        public string minDate = DateTime.Today.ToString("MM/dd/yyyy");
+
+        [ObservableProperty]
+        public string maxDate = DateTime.Today.AddYears(1).ToString("MM/dd/yyyy");
+
+        [ObservableProperty]
+        public DateTime selectedDate = DateTime.Today;
+
+        [ObservableProperty]
+        bool isLogged;
+
+        [ObservableProperty]
         int serviceId;
+
         [ObservableProperty]
         ServiceDetails? serviceDetails;
 
@@ -25,6 +38,13 @@ namespace BookingService.Maui.ViewModel.Service
         {
             var serviceDetalis = await serviceService.GetServiceDetalis(ServiceId);
             ServiceDetails = serviceDetalis.Value;
+            IsLogged = await AuthService.IsLogged();
+        }
+
+        [RelayCommand]
+        public async Task ReservationButtonClick()
+        {
+
         }
     }
 }
