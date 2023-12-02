@@ -10,35 +10,28 @@ namespace BookingService.Maui.ViewModel.User
     [QueryProperty("ComapnyId", "ComapnyId")]
     public partial class CompanyServicesViewModel : BaseViewModel
     {
-        //[ObservableProperty]
-        //CompanyService selectedService = new();
         [ObservableProperty]
         CompanyService selectedService = new();
+
         [ObservableProperty]
         int comapnyId;
 
+        [ObservableProperty]
         private ObservableCollection<CompanyService> servicesList;
-        public ObservableCollection<CompanyService> ServicesList
-        {
-            get => servicesList;
-            set => SetProperty(ref servicesList, value);
-        }
 
         private readonly IServiceService serviceService;
 
         public CompanyServicesViewModel(IServiceService serviceService)
         {
             this.serviceService = serviceService;
+            ServicesList = new();
         }
 
         [RelayCommand]
         public async Task Appearing()
         {
-            var services = await serviceService.GetCompanyServices(ComapnyId);
-            ServicesList = new ObservableCollection<CompanyService>(services.Value);
-            //await InitalizeData();
+            await InitalizeData();
         }
-
         [RelayCommand]
         public async Task AddServiceButtonClick()
         {
@@ -71,10 +64,10 @@ namespace BookingService.Maui.ViewModel.User
                     break;
             }
         }
-
         public async Task InitalizeData()
         {
-
+            var services = await serviceService.GetCompanyServices(ComapnyId);
+            ServicesList = new ObservableCollection<CompanyService>(services.Value);
         }
         private async Task DeleteService(int id)
         {
@@ -89,6 +82,7 @@ namespace BookingService.Maui.ViewModel.User
                 return;
             }
             await DialogService.ShowAlert("Usunięto", "Pomyślnie usunięto usługę");
+            await InitalizeData();
         }
 
     }

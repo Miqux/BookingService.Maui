@@ -9,12 +9,9 @@ namespace BookingService.Maui.ViewModel.Service
 {
     public partial class ServicesViewModel : BaseViewModel
     {
+        [ObservableProperty]
         private ObservableCollection<ServiceLight> servicesList;
-        public ObservableCollection<ServiceLight> ServicesList
-        {
-            get => servicesList;
-            set => SetProperty(ref servicesList, value);
-        }
+
         [ObservableProperty]
         ServiceLight selectedService = new();
 
@@ -23,6 +20,7 @@ namespace BookingService.Maui.ViewModel.Service
         public ServicesViewModel(IServiceService serviceService)
         {
             this.serviceService = serviceService;
+            ServicesList = new ObservableCollection<ServiceLight>();
         }
 
         [RelayCommand]
@@ -36,16 +34,14 @@ namespace BookingService.Maui.ViewModel.Service
             ServicesList = new ObservableCollection<ServiceLight>(services.Value);
         }
         [RelayCommand]
-        private async Task ItemSelected(object item)
+        private async Task ItemSelected()
         {
-            if (item is null)
+            if (SelectedService is null)
                 return;
-
-            ServiceLight serviceLight = (ServiceLight)item;
 
             var temp = new Dictionary<string, object>
             {
-                { "ServiceId", serviceLight.Id }
+                { "ServiceId", SelectedService.Id }
             };
             await Shell.Current.GoToAsync(nameof(ServiceDetalisView), temp);
         }

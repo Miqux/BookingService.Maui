@@ -19,11 +19,11 @@ namespace BookingService.Maui.ViewModel.User
 
         [Required(ErrorMessage = "Koszt jest wymagany!")]
         [ObservableProperty]
-        decimal cost;
+        decimal? cost = null;
 
         [Required(ErrorMessage = "Koszt jest wymagany!")]
         [ObservableProperty]
-        int durationInMinutes;
+        int? durationInMinutes = null;
 
         [ObservableProperty]
         ObservableCollection<IdName> types;
@@ -59,8 +59,8 @@ namespace BookingService.Maui.ViewModel.User
             Model.Service.Service service = new()
             {
                 Name = Name,
-                Cost = Cost,
-                DurationInMinutes = DurationInMinutes,
+                Cost = Cost ?? 0,
+                DurationInMinutes = DurationInMinutes ?? 0,
                 Type = (Enums.ServiceType)Type.Id,
                 CompanyId = companyId
             };

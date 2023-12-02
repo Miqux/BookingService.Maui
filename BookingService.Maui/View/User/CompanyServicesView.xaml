@@ -20,7 +20,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label
-                            Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="{StaticResource PrimaryColor}"  />
+                            Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"  />
                         <Label Grid.Row="1"
                             Text="{Binding Cost, StringFormat='{}{0} zł'}" FontSize="16" TextColor="Gray"
                             FontAttributes="Italic" />

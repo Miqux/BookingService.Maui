@@ -6,7 +6,7 @@ public partial class ServicesView : ContentPage
 {
     public ServicesView(ServicesViewModel vm)
     {
-        InitializeComponent();
         BindingContext = vm;
+        InitializeComponent();
     }
 }

@@ -30,6 +30,7 @@ namespace BookingService.Maui
             builder.Services.AddSingleton<JwtAuthHandler>();
             builder.Services.AddHttpClient("BookingServiceApi", client =>
             {
+                //client.BaseAddress = new Uri("https://6a89-83-6-135-55.ngrok.io/api/");
                 client.BaseAddress = new Uri("http://10.0.2.2:5233/api/");
                 client.Timeout = TimeSpan.FromSeconds(20);
             }).ConfigurePrimaryHttpMessageHandler<JwtAuthHandler>();
