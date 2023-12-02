@@ -53,6 +53,7 @@ namespace BookingService.Maui.Repository.Repository
                 return new ResultModel<List<ServicesLightResponse>>(false, "Błąd wewnętrzny", new List<ServicesLightResponse>());
             }
         }
+
         public async Task<ResultModel<BaseCommandResponse>> AddService(AddServiceRequest model)
         {
             try
@@ -98,6 +99,28 @@ namespace BookingService.Maui.Repository.Repository
             catch
             {
                 return new ResultModel<BaseResponse>(false, "Błąd wewnętrzny", new BaseResponse());
+            }
+        }
+
+        public async Task<ResultModel<ServiceDetailsResponse>> GetServicesDetails(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync("Service/GetServiceDetails/" + id.ToString());
+                if (response == null) return new ResultModel<ServiceDetailsResponse>(false, "Błąd połączenia z api",
+                    new ServiceDetailsResponse());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                ServiceDetailsResponse? servicesResponse = JsonConvert.DeserializeObject<ServiceDetailsResponse>(responseData);
+
+                if (servicesResponse == null)
+                    return new ResultModel<ServiceDetailsResponse>(false, "Błąd wewnętrzny", new ServiceDetailsResponse());
+
+                return new ResultModel<ServiceDetailsResponse>(true, servicesResponse);
+            }
+            catch
+            {
+                return new ResultModel<ServiceDetailsResponse>(false, "Błąd wewnętrzny", new ServiceDetailsResponse());
             }
         }
     }

@@ -1,7 +1,8 @@
-﻿using static BookingService.Maui.Model.Enums;
-namespace BookingService.Maui.Model.Service
+﻿using static BookingService.Maui.Model.ApiResponse.ApiEnums;
+
+namespace BookingService.Maui.Model.ApiResponse.Service
 {
-    public class ServiceDetails
+    public class ServiceDetailsResponse
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

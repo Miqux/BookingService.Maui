@@ -58,16 +58,16 @@
                 </Grid.RowDefinitions>
 
                 <Label Text="Miasto:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" />
-                <Label Text="{Binding ServiceDetails.City}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
+                <Label Text="{Binding ServiceDetails.CompanyAddressCity}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
 
                 <Label Text="Ulica:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
-                <Label Text="{Binding ServiceDetails.Street}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+                <Label Text="{Binding ServiceDetails.CompanyAddressStreet}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
 
                 <Label Text="Numer:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
-                <Label Text="{Binding ServiceDetails.HouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+                <Label Text="{Binding ServiceDetails.CompanyAddressHouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
 
                 <Label Text="Numer lokalu:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
-                <Label Text="{Binding ServiceDetails.HouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
+                <Label Text="{Binding ServiceDetails.CompanyAddressHouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
     
                 </Grid>
         </StackLayout>

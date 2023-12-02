@@ -17,6 +17,7 @@ namespace BookingService.Maui.Services.Services
             this.serviceRepository = serviceRepository;
             this.mapper = mapper;
         }
+
         public async Task<ResultModel<List<ServiceLight>>> GetServiceLight()
         {
             var services = await serviceRepository.GetServicesLight();
@@ -58,20 +59,12 @@ namespace BookingService.Maui.Services.Services
 
         public async Task<ResultModel<ServiceDetails>> GetServiceDetalis(int id)
         {
-            ServiceDetails service = new()
-            {
-                Name = "Testowa usługa 1",
-                Cost = 100,
-                DurationInMinutes = 60,
-                Type = Enums.ServiceType.BeardTrimming,
-                CompanyName = "Firma1",
-                City = "Warszawa",
-                Street = "Warszawska",
-                Zipcode = "01-221",
-                HouseNumber = 69,
-                ApartmentNumber = 12
-            };
-            return new ResultModel<ServiceDetails>(true, service);
+            var services = await serviceRepository.GetServicesDetails(id);
+
+            if (!services.Result || services.Value is null)
+                return new ResultModel<ServiceDetails>(false, services.Message, new ServiceDetails());
+
+            return new ResultModel<ServiceDetails>(true, mapper.Map<ServiceDetails>(services.Value));
         }
     }
 }

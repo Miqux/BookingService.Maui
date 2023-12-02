@@ -45,7 +45,7 @@ namespace BookingService.Maui.ViewModel.Service
 
             var temp = new Dictionary<string, object>
             {
-                { "ComapnyId", serviceLight.Id }
+                { "ServiceId", serviceLight.Id }
             };
             await Shell.Current.GoToAsync(nameof(ServiceDetalisView), temp);
         }
