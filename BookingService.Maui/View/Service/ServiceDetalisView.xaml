@@ -72,7 +72,7 @@
                 </Grid>
         </StackLayout>
     </Frame>
-    <Frame IsVisible="{Binding IsLogged, Converter={StaticResource NegateBooleanConverter}}"
+    <Frame IsVisible="{Binding IsLogged}"
         BackgroundColor="White" CornerRadius="8" Padding="20">
             <StackLayout>
                 <Label Text="Rezerwacja" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>

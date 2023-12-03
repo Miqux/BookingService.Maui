@@ -30,7 +30,7 @@ namespace BookingService.Maui
             builder.Services.AddSingleton<JwtAuthHandler>();
             builder.Services.AddHttpClient("BookingServiceApi", client =>
             {
-                //client.BaseAddress = new Uri("https://e67e-83-6-135-55.ngrok.io/api/");
+                //client.BaseAddress = new Uri("https://2ee4-83-6-135-55.ngrok.io/api/");
                 client.BaseAddress = new Uri("http://10.0.2.2:5233/api/");
                 client.Timeout = TimeSpan.FromSeconds(10);
             }).ConfigurePrimaryHttpMessageHandler<JwtAuthHandler>();
@@ -63,12 +63,14 @@ namespace BookingService.Maui
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
             builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+            builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IDialogService, DialogService>();
             builder.Services.AddScoped<IServiceService, ServiceService>();
             builder.Services.AddScoped<ICompanyService, CompanyService>();
+            builder.Services.AddScoped<IReservationService, ReservationService>();
 
             SecureStorage.Default.RemoveAll();
 

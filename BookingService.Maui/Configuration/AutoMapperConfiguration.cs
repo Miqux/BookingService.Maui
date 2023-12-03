@@ -2,12 +2,14 @@
 using BookingService.Maui.Model;
 using BookingService.Maui.Model.Address;
 using BookingService.Maui.Model.ApiRequest;
+using BookingService.Maui.Model.ApiRequest.Reservation;
 using BookingService.Maui.Model.ApiRequest.Service;
 using BookingService.Maui.Model.ApiResponse;
 using BookingService.Maui.Model.ApiResponse.Address;
 using BookingService.Maui.Model.ApiResponse.Company;
 using BookingService.Maui.Model.ApiResponse.Service;
 using BookingService.Maui.Model.Company;
+using BookingService.Maui.Model.Reservation;
 using BookingService.Maui.Model.Service;
 using BookingService.Maui.Model.User;
 
@@ -28,6 +30,7 @@ namespace BookingService.Maui.Configuration
             CreateMap<PossibleServiceHourResponse, ServiceTime>();
             CreateMap<ServiceDetailsResponse, ServiceDetails>();
             CreateMap<Service, AddServiceRequest>().ReverseMap();
+            CreateMap<Reservation, AddReservationRequest>();
         }
     }
 }

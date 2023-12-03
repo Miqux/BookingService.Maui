@@ -1,4 +1,5 @@
 ﻿using BookingService.Maui.Model;
+using BookingService.Maui.Model.Reservation;
 using BookingService.Maui.Model.Service;
 using BookingService.Maui.Services.Interface;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -29,10 +30,12 @@ namespace BookingService.Maui.ViewModel.Service
         ServiceTime? selectedServiceTime;
 
         private readonly IServiceService serviceService;
+        private readonly IReservationService reservationService;
 
-        public ServiceDetalisViewModel(IServiceService serviceService)
+        public ServiceDetalisViewModel(IServiceService serviceService, IReservationService reservationService)
         {
             this.serviceService = serviceService;
+            this.reservationService = reservationService;
         }
         partial void OnSelectedDateChanged(DateTime value)
         {
@@ -55,7 +58,28 @@ namespace BookingService.Maui.ViewModel.Service
                 await DialogService.ShowAlert("", "Wybierz godzinę");
                 return;
             }
+
+            if (!int.TryParse(await SecureStorage.Default.GetAsync("userId"), out int userId))
+                return;
+
+            Reservation reservation = new()
+            {
+                UserId = userId,
+                ServiceId = ServiceId,
+                StartDateAndTime = SelectedDate.Add(SelectedServiceTime.StartTime),
+                EndDateAndTime = SelectedDate.Add(SelectedServiceTime.EndTime)
+            };
+
+            var result = await reservationService.AddReservation(reservation);
+
+            if (result is null || !result.Result)
+            {
+                await DialogService.ShowAlert("Błąd", "Nie udało się dodać rezerwacji");
+                return;
+            }
+            await DialogService.ShowAlert("Powodzenie", "Dodano rezerwację");
         }
+
         [RelayCommand]
         public async Task ReservationTimeButtonClick()
         {
