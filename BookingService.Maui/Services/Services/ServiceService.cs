@@ -27,6 +27,7 @@ namespace BookingService.Maui.Services.Services
 
             return new ResultModel<List<ServiceLight>>(true, mapper.Map<List<ServiceLight>>(services.Value));
         }
+
         public async Task<ResultModel<List<Model.Service.CompanyService>>> GetCompanyServices(int comapnyId)
         {
             var services = await serviceRepository.GetCompanyServices(comapnyId);
@@ -36,6 +37,7 @@ namespace BookingService.Maui.Services.Services
 
             return new ResultModel<List<Model.Service.CompanyService>>(true, mapper.Map<List<Model.Service.CompanyService>>(services.Value));
         }
+
         public async Task<ResultModel<int?>> AddService(Service model)
         {
             var addServiceModel = mapper.Map<AddServiceRequest>(model);
@@ -65,6 +67,16 @@ namespace BookingService.Maui.Services.Services
                 return new ResultModel<ServiceDetails>(false, services.Message, new ServiceDetails());
 
             return new ResultModel<ServiceDetails>(true, mapper.Map<ServiceDetails>(services.Value));
+        }
+
+        public async Task<ResultModel<List<ServiceTime>>> GetPossibleServiceHours(int id, DateOnly date)
+        {
+            var services = await serviceRepository.GetPossibleServiceHours(id, date);
+
+            if (!services.Result || services.Value is null)
+                return new ResultModel<List<ServiceTime>>(false, services.Message, new List<ServiceTime>());
+
+            return new ResultModel<List<ServiceTime>>(true, mapper.Map<List<ServiceTime>>(services.Value));
         }
     }
 }

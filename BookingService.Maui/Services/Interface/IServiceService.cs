@@ -10,5 +10,6 @@ namespace BookingService.Maui.Services.Interface
         public Task<ResultModel<int?>> AddService(Service model);
         public Task<ResultModel<bool>> DeleteService(int id);
         public Task<ResultModel<ServiceDetails>> GetServiceDetalis(int id);
+        public Task<ResultModel<List<ServiceTime>>> GetPossibleServiceHours(int id, DateOnly date);
     }
 }

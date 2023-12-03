@@ -123,5 +123,34 @@ namespace BookingService.Maui.Repository.Repository
                 return new ResultModel<ServiceDetailsResponse>(false, "Błąd wewnętrzny", new ServiceDetailsResponse());
             }
         }
+
+        public async Task<ResultModel<List<PossibleServiceHourResponse>>> GetPossibleServiceHours(int id, DateOnly date)
+        {
+            try
+            {
+                var temp = date.ToString();
+                HttpResponseMessage response = await HttpClient.GetAsync(string.Format("Service/GetPossibleServiceHour/" + id.ToString() + "/" + date.ToString()));
+                if (response == null) return new ResultModel<List<PossibleServiceHourResponse>>(false, "Błąd połączenia z api",
+                    new List<PossibleServiceHourResponse>());
+
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound) return new ResultModel<List<PossibleServiceHourResponse>>(false, "Brak wolnych godzin",
+                    new List<PossibleServiceHourResponse>());
+
+                if (!response.IsSuccessStatusCode)
+                    return new ResultModel<List<PossibleServiceHourResponse>>(false, "Nie udało się pobrać", new List<PossibleServiceHourResponse>());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                List<PossibleServiceHourResponse>? servicesResponse = JsonConvert.DeserializeObject<List<PossibleServiceHourResponse>>(responseData);
+
+                if (servicesResponse == null)
+                    return new ResultModel<List<PossibleServiceHourResponse>>(false, "Błąd wewnętrzny", new List<PossibleServiceHourResponse>());
+
+                return new ResultModel<List<PossibleServiceHourResponse>>(true, servicesResponse);
+            }
+            catch (Exception ex)
+            {
+                return new ResultModel<List<PossibleServiceHourResponse>>(false, "Błąd wewnętrzny", new List<PossibleServiceHourResponse>());
+            }
+        }
     }
 }

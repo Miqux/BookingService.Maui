@@ -12,5 +12,6 @@ namespace BookingService.Maui.Repository.Interface
         public Task<ResultModel<List<CompanyServiceResponse>>> GetCompanyServices(int companyId);
         public Task<ResultModel<BaseCommandResponse>> AddService(AddServiceRequest model);
         public Task<ResultModel<BaseResponse>> DeleteService(int id);
+        public Task<ResultModel<List<PossibleServiceHourResponse>>> GetPossibleServiceHours(int id, DateOnly date);
     }
 }
