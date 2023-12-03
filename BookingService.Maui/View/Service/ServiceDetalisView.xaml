@@ -29,13 +29,13 @@
                 <Label Text="Nazwa usługi:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
                 <Label Text="{Binding ServiceDetails.Name}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
 
-                <Label Text="Miasto:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                <Label Text="Koszt:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
                     <Label Text="{Binding ServiceDetails.Cost,  StringFormat='{}{0} zł'}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
 
-                <Label Text="Ulica:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                <Label Text="Czas trwania:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
                     <Label Text="{Binding ServiceDetails.DurationInMinutes,  StringFormat='{}{0} minut'}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
 
-                <Label Text="Kod pocztowy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                <Label Text="Typ usługi:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
                 <Label Text="{Binding ServiceDetails.Type, Converter={StaticResource DescriptionEnumConverter}}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
             </Grid>
         </StackLayout>
@@ -88,14 +88,14 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Text="Data rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" />
-                    <DatePicker MinimumDate="{Binding MinDate}"
-                        MaximumDate="{Binding MaxDate}"
+                    <Label Text="Data rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" VerticalOptions="Center"/>
+                    <DatePicker x:Name ="datepicker"
                         Date="{Binding SelectedDate}" Grid.Column="1"/>         
 
                     <Label Text="Godzina rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" VerticalOptions="Center"/>
-                    <Label Text="{Binding ServiceDetails.CompanyAddressStreet}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
-                    
+                    <Button Text="{Binding SelectedTime}" BackgroundColor="Transparent" TextColor="Black" FontSize="14" Grid.Row="1" Grid.Column="1"
+                        Command="{Binding ReservationTimeButtonClickCommand}" VerticalOptions="Center"/>
+                         
                     <Button Text="Zarezerwuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8" Grid.Row ="2" Grid.ColumnSpan="2"
                         HeightRequest="40" Margin="0,20,0,0" Command="{Binding ReservationButtonClickCommand}"/>
                 </Grid>

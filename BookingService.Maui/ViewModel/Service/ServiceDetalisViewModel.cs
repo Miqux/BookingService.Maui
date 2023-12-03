@@ -9,12 +9,6 @@ namespace BookingService.Maui.ViewModel.Service
     public partial class ServiceDetalisViewModel : BaseViewModel
     {
         [ObservableProperty]
-        public string minDate = DateTime.Today.ToString("MM/dd/yyyy");
-
-        [ObservableProperty]
-        public string maxDate = DateTime.Today.AddYears(1).ToString("MM/dd/yyyy");
-
-        [ObservableProperty]
         public DateTime selectedDate = DateTime.Today;
 
         [ObservableProperty]
@@ -26,13 +20,19 @@ namespace BookingService.Maui.ViewModel.Service
         [ObservableProperty]
         ServiceDetails? serviceDetails;
 
+        [ObservableProperty]
+        string selectedTime = "Wybierz godzinę";
+
         private readonly IServiceService serviceService;
 
         public ServiceDetalisViewModel(IServiceService serviceService)
         {
             this.serviceService = serviceService;
         }
+        partial void OnSelectedDateChanged(DateTime value)
+        {
 
+        }
         [RelayCommand]
         public async Task Appearing()
         {
@@ -45,6 +45,23 @@ namespace BookingService.Maui.ViewModel.Service
         public async Task ReservationButtonClick()
         {
 
+        }
+        [RelayCommand]
+        public async Task ReservationTimeButtonClick()
+        {
+            List<string> timeList = new();
+
+            timeList.Add("12:00");
+            timeList.Add("14:00");
+            timeList.Add("16:00");
+            timeList.Add("18:00");
+
+            var temp = await DialogService.ShowOptionsDialog("Wybierz godzine", timeList);
+
+            if (temp == null || temp == "Zamknij")
+                return;
+
+            SelectedTime = temp;
         }
     }
 }
