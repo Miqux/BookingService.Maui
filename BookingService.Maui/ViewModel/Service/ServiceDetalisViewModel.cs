@@ -82,6 +82,7 @@ namespace BookingService.Maui.ViewModel.Service
                 return;
             }
             await DialogService.ShowAlert("Powodzenie", "Dodano rezerwację");
+            await Shell.Current.Navigation.PopAsync();
         }
 
         [RelayCommand]
