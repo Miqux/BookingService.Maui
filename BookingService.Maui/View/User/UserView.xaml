@@ -7,107 +7,113 @@
              xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
              x:DataType="viewmodel:User.UserViewModel"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <Grid>
+        <ActivityIndicator x:Name="activity"
+                    IsRunning="{Binding IsBusy}"
+                    Color="{DynamicResource WhiteBrush}" ZIndex="2"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="100" HeightRequest="100"/>
 
-    <StackLayout Padding="20" Spacing="20" VerticalOptions="Center">
+        <StackLayout Padding="20" Spacing="20" VerticalOptions="Center" ZIndex="1" IsVisible="{Binding IsBusy, Converter={StaticResource NegateBooleanConverter}}">
 
-        <!-- Sekcja "Nie jesteś zalogowany" -->
-        <Frame IsVisible="{Binding IsLogged, Converter={StaticResource NegateBooleanConverter}}"
-               BackgroundColor="White" CornerRadius="8" Padding="20" Margin="0,0,0,10">
-            <StackLayout>
+            <!-- Sekcja "Nie jesteś zalogowany" -->
+            <Frame IsVisible="{Binding IsLogged, Converter={StaticResource NegateBooleanConverter}}"
+            BackgroundColor="White" CornerRadius="8" Padding="20" Margin="0,0,0,10">
+                <StackLayout>
 
-                <Label Text="Nie jesteś zalogowany" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" />
+                    <Label Text="Nie jesteś zalogowany" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" />
 
-                <Button Text="Zaloguj się" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
-                        HeightRequest="50" Margin="0,20,0,0" Command="{Binding LoginButtonClickCommand}"/>
-            </StackLayout>
-        </Frame>
+                    <Button Text="Zaloguj się" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                     HeightRequest="50" Margin="0,20,0,0" Command="{Binding LoginButtonClickCommand}"/>
+                </StackLayout>
+            </Frame>
 
-        <!-- Sekcja "Dane użytkownika" -->
-        <Frame IsVisible="{Binding IsLogged}"
-               BackgroundColor="White" CornerRadius="8" Padding="20">
-            <StackLayout>
+            <!-- Sekcja "Dane użytkownika" -->
+            <Frame IsVisible="{Binding IsLogged}"
+            BackgroundColor="White" CornerRadius="8" Padding="20">
+                <StackLayout>
 
-                <Label Text="Dane użytkownika" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+                    <Label Text="Dane użytkownika" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <Label Text="Imię:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
-                    <Label Text="{Binding Name}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
+                        <Label Text="Imię:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
+                        <Label Text="{Binding Name}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
 
-                    <Label Text="Nazwisko:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
-                    <Label Text="{Binding LastName}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+                        <Label Text="Nazwisko:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                        <Label Text="{Binding LastName}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
 
-                    <Label Text="Login:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
-                    <Label Text="{Binding Login}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+                        <Label Text="Login:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                        <Label Text="{Binding Login}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
 
-                    <Label Text="Email:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
-                    <Label Text="{Binding Email}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
-                </Grid>
+                        <Label Text="Email:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                        <Label Text="{Binding Email}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
+                    </Grid>
 
-                <!-- Dodaj dowolne inne informacje o użytkowniku, jeśli są dostępne -->
-                <Button Text="Wyloguj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
-                        HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
-            </StackLayout>
-        </Frame>
-        
-        <!-- Sekcja "Dane firmy" -->
-        <Frame IsVisible="{Binding IsCompany}"
-        BackgroundColor="White" CornerRadius="8" Padding="20">
-            <StackLayout>
+                    <!-- Dodaj dowolne inne informacje o użytkowniku, jeśli są dostępne -->
+                    <Button Text="Wyloguj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                     HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
+                </StackLayout>
+            </Frame>
 
-                <Label Text="Dane firmy" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+            <!-- Sekcja "Dane firmy" -->
+            <Frame IsVisible="{Binding IsCompany}"
+     BackgroundColor="White" CornerRadius="8" Padding="20">
+                <StackLayout>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                    <Label Text="Dane firmy" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label Text="Nazwa firmy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
-                    <Label Text="{Binding CompanyName}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
-                    
-                    <Label Text="Miasto:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
-                    <Label Text="{Binding Address.City}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <Label Text="Ulica:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
-                    <Label Text="{Binding Address.Street}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+                        <Label Text="Nazwa firmy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
+                        <Label Text="{Binding CompanyName}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
 
-                    <Label Text="Kod pocztowy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
-                    <Label Text="{Binding Address.Zipcode}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
+                        <Label Text="Miasto:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                        <Label Text="{Binding Address.City}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
 
-                    <Label Text="Numer budynku:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="4"/>
-                    <Label Text="{Binding Address.HouseNumber}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="4" Grid.Column="1"/>
-                </Grid>
+                        <Label Text="Ulica:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                        <Label Text="{Binding Address.Street}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
 
-                <!-- Dodaj dowolne inne informacje o użytkowniku, jeśli są dostępne -->
-                <Button Text="Usługi" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
-                 HeightRequest="50" Margin="0,20,0,0" Command="{Binding CompanyServicesButtonClickCommand}"/>
-                
-                <Button Text="Edytuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
-                 HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
-            </StackLayout>
-        </Frame>
-    </StackLayout>
+                        <Label Text="Kod pocztowy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                        <Label Text="{Binding Address.Zipcode}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
 
+                        <Label Text="Numer budynku:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="4"/>
+                        <Label Text="{Binding Address.HouseNumber}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="4" Grid.Column="1"/>
+                    </Grid>
+
+                    <!-- Dodaj dowolne inne informacje o użytkowniku, jeśli są dostępne -->
+                    <Button Text="Usługi" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+              HeightRequest="50" Margin="0,20,0,0" Command="{Binding CompanyServicesButtonClickCommand}"/>
+
+                    <Button Text="Edytuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+              HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </Grid>   
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>

@@ -26,7 +26,9 @@ namespace BookingService.Maui.ViewModel.Service
         [RelayCommand]
         private async Task Appearing()
         {
+            IsBusy = true;
             await InitializeData();
+            IsBusy = false;
         }
         public async Task InitializeData()
         {

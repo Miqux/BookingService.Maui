@@ -26,22 +26,30 @@ namespace BookingService.Maui.ViewModel.User
         [RelayCommand]
         public async Task LoginButtonClick()
         {
-            var validation = Validate();
-            if (!validation.Item1)
+            try
             {
-                await DialogService.ShowAlert("Niepoprawne dane", validation.Item2);
-                return;
+                IsBusy = true;
+                var validation = Validate();
+                if (!validation.Item1)
+                {
+                    await DialogService.ShowAlert("Niepoprawne dane", validation.Item2);
+                    return;
+                }
+
+                var loginResult = await AuthService.Login(Login, Password);
+
+                if (!loginResult.Result)
+                {
+                    await DialogService.ShowAlert("Błąd", loginResult.Message);
+                    return;
+                }
+                await DialogService.ShowAlert("Zalogowano", "Pomyślnie zalogowano");
+                await Shell.Current.GoToAsync(nameof(UserView));
             }
-
-            var loginResult = await AuthService.Login(Login, Password);
-
-            if (!loginResult.Result)
+            finally
             {
-                await DialogService.ShowAlert("Błąd", loginResult.Message);
-                return;
+                IsBusy = false;
             }
-            await DialogService.ShowAlert("Zalogowano", "Pomyślnie zalogowano");
-            await Shell.Current.GoToAsync(nameof(UserView));
         }
 
         [RelayCommand]

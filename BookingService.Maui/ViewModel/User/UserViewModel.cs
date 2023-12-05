@@ -56,12 +56,20 @@ namespace BookingService.Maui.ViewModel.User
         [RelayCommand]
         private async Task Appearing()
         {
-            IsLogged = await AuthService.IsLogged();
-            if (!IsLogged)
-                return;
+            try
+            {
+                IsBusy = true;
+                IsLogged = await AuthService.IsLogged();
+                if (!IsLogged)
+                    return;
 
-            await InitUser();
-            await InitCompany();
+                await InitUser();
+                await InitCompany();
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
         [RelayCommand]
         private async Task CompanyServicesButtonClick()

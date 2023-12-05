@@ -8,100 +8,108 @@
              x:DataType="viewmodel:Service.ServiceDetalisViewModel"
              xmlns:local="clr-namespace:BookingService.Maui.Model.Service"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
-    <StackLayout Padding="20" Spacing="20">
-        <Frame
+    <Grid Padding="10">
+        <ActivityIndicator x:Name="activity"
+                IsRunning="{Binding IsBusy}"
+                Color="{DynamicResource WhiteBrush}" ZIndex="2"
+                VerticalOptions="Center" HorizontalOptions="Center"
+                WidthRequest="100" HeightRequest="100"/>
+        
+        <StackLayout Padding="20" Spacing="20" IsVisible="{Binding AppearingCommand.IsRunning, Converter={StaticResource NegateBooleanConverter}}" ZIndex="1">
+            <Frame
         BackgroundColor="White" CornerRadius="8" Padding="20">
-        <StackLayout>
-                <Label Text="Usługa" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
-                <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+                <StackLayout>
+                    <Label Text="Usługa" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                <Label Text="Nazwa usługi:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
-                <Label Text="{Binding ServiceDetails.Name}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
+                        <Label Text="Nazwa usługi:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
+                        <Label Text="{Binding ServiceDetails.Name}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
 
-                <Label Text="Koszt:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
-                    <Label Text="{Binding ServiceDetails.Cost,  StringFormat='{}{0} zł'}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+                        <Label Text="Koszt:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                        <Label Text="{Binding ServiceDetails.Cost,  StringFormat='{}{0} zł'}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
 
-                <Label Text="Czas trwania:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
-                    <Label Text="{Binding ServiceDetails.DurationInMinutes,  StringFormat='{}{0} minut'}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+                        <Label Text="Czas trwania:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                        <Label Text="{Binding ServiceDetails.DurationInMinutes,  StringFormat='{}{0} minut'}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
 
-                <Label Text="Typ usługi:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
-                <Label Text="{Binding ServiceDetails.Type, Converter={StaticResource DescriptionEnumConverter}}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
-            </Grid>
-        </StackLayout>
-    </Frame>
-    <Frame
+                        <Label Text="Typ usługi:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                        <Label Text="{Binding ServiceDetails.Type, Converter={StaticResource DescriptionEnumConverter}}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <Frame
        BackgroundColor="White" CornerRadius="8" Padding="20">
-        <StackLayout>
-                <Label Text="Adres" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
-                <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+                <StackLayout>
+                    <Label Text="Adres" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                <Label Text="Miasto:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" />
-                <Label Text="{Binding ServiceDetails.CompanyAddressCity}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
+                        <Label Text="Miasto:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" />
+                        <Label Text="{Binding ServiceDetails.CompanyAddressCity}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Column="1"/>
 
-                <Label Text="Ulica:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
-                <Label Text="{Binding ServiceDetails.CompanyAddressStreet}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
+                        <Label Text="Ulica:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1"/>
+                        <Label Text="{Binding ServiceDetails.CompanyAddressStreet}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" Grid.Column="1"/>
 
-                <Label Text="Numer:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
-                <Label Text="{Binding ServiceDetails.CompanyAddressHouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
+                        <Label Text="Numer:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2"/>
+                        <Label Text="{Binding ServiceDetails.CompanyAddressHouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="2" Grid.Column="1"/>
 
-                <Label Text="Numer lokalu:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
-                <Label Text="{Binding ServiceDetails.CompanyAddressHouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
-    
-                </Grid>
-        </StackLayout>
-    </Frame>
-    <Frame IsVisible="{Binding IsLogged}"
-        BackgroundColor="White" CornerRadius="8" Padding="20">
-            <StackLayout>
-                <Label Text="Rezerwacja" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                        <Label Text="Numer lokalu:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3"/>
+                        <Label Text="{Binding ServiceDetails.CompanyAddressHouseNumber}" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="3" Grid.Column="1"/>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <Frame IsVisible="{Binding IsLogged}"
+                BackgroundColor="White" CornerRadius="8" Padding="20">
+                <StackLayout>
+                    <Label Text="Rezerwacja" FontSize="22" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Label Text="Data rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" VerticalOptions="Center"/>
-                    <DatePicker x:Name ="datepicker"
-                        Date="{Binding SelectedDate}" Grid.Column="1"/>         
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <Label Text="Godzina rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" VerticalOptions="Center"/>
-                    <Button Text="{Binding SelectedTime}" BackgroundColor="Transparent" TextColor="Black" FontSize="14" Grid.Row="1" Grid.Column="1"
+                        <Label Text="Data rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" VerticalOptions="Center"/>
+                        <DatePicker x:Name ="datepicker"
+                        Date="{Binding SelectedDate}" Grid.Column="1"/>
+
+                        <Label Text="Godzina rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" VerticalOptions="Center"/>
+                        <Button Text="{Binding SelectedTime}" BackgroundColor="Transparent" TextColor="Black" FontSize="14" Grid.Row="1" Grid.Column="1"
                         Command="{Binding ReservationTimeButtonClickCommand}" VerticalOptions="Center"/>
-                         
-                    <Button Text="Zarezerwuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8" Grid.Row ="2" Grid.ColumnSpan="2"
+
+                        <Button Text="Zarezerwuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8" Grid.Row ="2" Grid.ColumnSpan="2"
                         HeightRequest="40" Margin="0,20,0,0" Command="{Binding ReservationButtonClickCommand}"/>
-                </Grid>
-            </StackLayout>
-    </Frame>
-    </StackLayout>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </Grid>
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
     </ContentPage.Behaviors>

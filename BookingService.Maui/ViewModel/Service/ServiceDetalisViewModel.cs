@@ -10,7 +10,6 @@ namespace BookingService.Maui.ViewModel.Service
     [QueryProperty("ServiceId", "ServiceId")]
     public partial class ServiceDetalisViewModel : BaseViewModel
     {
-        List<ServiceTime>? possibleServiceTime;
         [ObservableProperty]
         public DateTime selectedDate = DateTime.Today;
 
@@ -45,14 +44,19 @@ namespace BookingService.Maui.ViewModel.Service
         [RelayCommand]
         public async Task Appearing()
         {
+            IsBusy = true;
             var serviceDetalis = await serviceService.GetServiceDetalis(ServiceId);
             ServiceDetails = serviceDetalis.Value;
             IsLogged = await AuthService.IsLogged();
+            IsBusy = false;
         }
 
         [RelayCommand]
         public async Task ReservationButtonClick()
         {
+            if (IsBusy)
+                return;
+
             if (SelectedServiceTime is null)
             {
                 await DialogService.ShowAlert("", "Wybierz godzinę");
@@ -83,14 +87,14 @@ namespace BookingService.Maui.ViewModel.Service
         [RelayCommand]
         public async Task ReservationTimeButtonClick()
         {
+            IsBusy = true;
             var possibleHours = await serviceService.GetPossibleServiceHours(ServiceId, DateOnly.FromDateTime(SelectedDate));
+            IsBusy = false;
             if (possibleHours is null || !possibleHours.Result)
             {
                 await DialogService.ShowAlert("Błąd", possibleHours?.Message ?? "Błąd");
                 return;
             }
-
-            possibleServiceTime = possibleHours.Value;
 
             List<string> timeList = new();
 

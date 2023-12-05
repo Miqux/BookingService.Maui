@@ -3,8 +3,11 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace BookingService.Maui.ViewModel
 {
-    public class BaseValidatorViewModel : ObservableValidator
+    public partial class BaseValidatorViewModel : ObservableValidator
     {
+        [ObservableProperty]
+        bool isBusy;
+
         public readonly IDialogService DialogService = Provider.ServiceProvider.GetService<IDialogService>();
         public readonly IAuthService AuthService = Provider.ServiceProvider.GetService<IAuthService>();
 
