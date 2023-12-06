@@ -33,11 +33,11 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label 
-                    Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" />
+                                    Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" />
                                 <Label 
-                    Text="{Binding ComapnyName}" FontSize="16" TextColor="Gray" Grid.Row="1" />
+                                    Text="{Binding ComapnyName}" FontSize="16" TextColor="Gray" Grid.Row="1" />
                                 <Label 
-                    Text="{Binding Type, Converter={StaticResource DescriptionEnumConverter}}" FontSize="14" TextColor="Gray" Grid.Row="2" />
+                                    Text="{Binding Type, Converter={StaticResource DescriptionEnumConverter}}" FontSize="14" TextColor="Gray" Grid.Row="2" />
                             </Grid>
                         </Border>
                     </DataTemplate>

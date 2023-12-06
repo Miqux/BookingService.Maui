@@ -1,5 +1,7 @@
 ﻿using BookingService.Maui.Model.Address;
+using BookingService.Maui.Model.Company;
 using BookingService.Maui.Services.Interface;
+using BookingService.Maui.View.Company;
 using BookingService.Maui.View.User;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -26,10 +28,11 @@ namespace BookingService.Maui.ViewModel.User
         [ObservableProperty]
         string companyName = string.Empty;
         [ObservableProperty]
-        Address address = new();
+        Address? address;
 
         #endregion
 
+        private CompanyLight companyValue;
         private int companyId;
 
         private readonly IAddressService addressService;
@@ -46,6 +49,7 @@ namespace BookingService.Maui.ViewModel.User
         {
             await Shell.Current.GoToAsync(nameof(LoginView));
         }
+
         [RelayCommand]
         private async Task LogoutButtonClick()
         {
@@ -53,6 +57,7 @@ namespace BookingService.Maui.ViewModel.User
             await DialogService.ShowAlert("Wylogowano", "Pomyślnie wylogowano");
             await Shell.Current.GoToAsync(nameof(UserView));
         }
+
         [RelayCommand]
         private async Task Appearing()
         {
@@ -71,6 +76,7 @@ namespace BookingService.Maui.ViewModel.User
                 IsBusy = false;
             }
         }
+
         [RelayCommand]
         private async Task CompanyServicesButtonClick()
         {
@@ -80,6 +86,30 @@ namespace BookingService.Maui.ViewModel.User
             };
             await Shell.Current.GoToAsync(nameof(CompanyServicesView), temp);
         }
+
+        [RelayCommand]
+        private async Task EditCompanyButtonClick()
+        {
+            UpdateCompany model = new();
+
+            if (companyValue is null || Address is null)
+                return;
+
+            model.CompanyId = companyValue.Id;
+            model.CompanyName = companyValue.Name;
+            model.ApartmentNumber = Address.ApartmentNumber;
+            model.HouseNumber = Address.HouseNumber;
+            model.City = Address.City;
+            model.Street = Address.Street;
+            model.Zipcode = Address.Zipcode;
+
+            var temp = new Dictionary<string, object>
+            {
+                { "Model", model }
+            };
+            await Shell.Current.GoToAsync(nameof(EditCompanyView), temp);
+        }
+
         private async Task InitUser()
         {
             string userId = await SecureStorage.Default.GetAsync("userId");
@@ -94,6 +124,7 @@ namespace BookingService.Maui.ViewModel.User
             Login = user.Login;
             Email = user.Email;
         }
+
         private async Task InitCompany()
         {
             bool isCompanyBoss = await AuthService.IsCompanyBoss();
@@ -114,11 +145,12 @@ namespace BookingService.Maui.ViewModel.User
             await SecureStorage.Default.SetAsync("companyId", company.Value.Id.ToString());
 
             IsCompany = true;
-            var address = await addressService.GetById(company.Value.Id);
+            var address = await addressService.GetById(company.Value.AddressId);
 
             if (!address.Result)
                 return;
 
+            companyValue = company.Value;
             CompanyName = company.Value.Name;
             Address = address.Value;
         }

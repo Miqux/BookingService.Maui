@@ -86,6 +86,7 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Label Text="Nazwa firmy:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" />
@@ -102,14 +103,17 @@
 
                         <Label Text="Numer budynku:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="4"/>
                         <Label Text="{Binding Address.HouseNumber}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="4" Grid.Column="1"/>
+
+                        <Label Text="Numer lokalu:" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="5"/>
+                        <Label Text="{Binding Address.ApartmentNumber}" FontSize="18" TextColor="{DynamicResource PrimaryColor}" Grid.Row="5" Grid.Column="1"/>
                     </Grid>
 
                     <!-- Dodaj dowolne inne informacje o użytkowniku, jeśli są dostępne -->
                     <Button Text="Usługi" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
-              HeightRequest="50" Margin="0,20,0,0" Command="{Binding CompanyServicesButtonClickCommand}"/>
+                        HeightRequest="50" Margin="0,20,0,0" Command="{Binding CompanyServicesButtonClickCommand}"/>
 
                     <Button Text="Edytuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
-              HeightRequest="50" Margin="0,20,0,0" Command="{Binding LogoutButtonClickCommand}"/>
+                        HeightRequest="50" Margin="0,20,0,0" Command="{Binding EditCompanyButtonClickCommand}"/>
                 </StackLayout>
             </Frame>
         </StackLayout>

@@ -30,25 +30,27 @@ namespace BookingService.Maui.ViewModel.User
         [RelayCommand]
         public async Task Appearing()
         {
+            IsBusy = true;
             await InitalizeData();
+            IsBusy = false;
         }
+
         [RelayCommand]
         public async Task AddServiceButtonClick()
         {
 
             await Shell.Current.GoToAsync(nameof(AddCompanyServiceView));
         }
+
         [RelayCommand]
-        private async Task ItemSelected(object item)
+        private async Task ItemSelected()
         {
-            if (item == null)
+            if (SelectedService == null)
                 return;
 
-            CompanyService service = (CompanyService)item;
             List<string> options = new()
             {
-                "Usuń",
-                "Edytuj"
+                "Usuń"
             };
             string selectedOption = await DialogService.ShowOptionsDialog("Wybierz opcje", options);
 
@@ -59,16 +61,18 @@ namespace BookingService.Maui.ViewModel.User
             {
                 case "Usuń":
                     {
-                        await DeleteService(service.Id);
+                        await DeleteService(SelectedService.Id);
                     }
                     break;
             }
         }
+
         public async Task InitalizeData()
         {
             var services = await serviceService.GetCompanyServices(ComapnyId);
             ServicesList = new ObservableCollection<CompanyService>(services.Value);
         }
+
         private async Task DeleteService(int id)
         {
             var dialogResult = await DialogService.ShowYesOrNoDialog("Usuwanie", "Czy chcesz usunąć usługę?");
@@ -82,7 +86,7 @@ namespace BookingService.Maui.ViewModel.User
                 return;
             }
             await DialogService.ShowAlert("Usunięto", "Pomyślnie usunięto usługę");
-            await InitalizeData();
+            await Appearing();
         }
 
     }

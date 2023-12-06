@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.Company.EditCompanyView"
+             Title="EditCompanyView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:Company.EditCompanyViewModel"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+
+        <Label Text="Edycja firmy" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center"/>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Nazwa usługi" FontSize="16" Text="{Binding CompanyName}" />
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Miasto" FontSize="16" Text="{Binding City}" />
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Ulica" FontSize="16" Text="{Binding Street}" />
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Kod pocztowy" FontSize="16" Text="{Binding Zipcode}" />
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Numer domu" Keyboard="Numeric" FontSize="16" Text="{Binding HouseNumber}" />
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Numer lokalu" Keyboard="Numeric" FontSize="16" Text="{Binding ApartmentNumber}" />
+        </Frame>
+
+        <Button Text="Edytuj" Command="{Binding EditCompanyButtonClickCommand}" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8" HeightRequest="50" Margin="0,0,0,10" />
+
+    </StackLayout>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+</ContentPage>

@@ -1,8 +1,9 @@
-﻿namespace BookingService.Maui.Model.Address
+﻿namespace BookingService.Maui.Model.Company
 {
-    public class Address
+    public class UpdateCompany
     {
-        public int Id { get; set; }
+        public int CompanyId { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string Street { get; set; } = string.Empty;
         public string Zipcode { get; set; } = string.Empty;

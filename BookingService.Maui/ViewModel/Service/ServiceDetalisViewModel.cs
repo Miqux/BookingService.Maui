@@ -74,7 +74,9 @@ namespace BookingService.Maui.ViewModel.Service
                 EndDateAndTime = SelectedDate.Add(SelectedServiceTime.EndTime)
             };
 
+            IsBusy = true;
             var result = await reservationService.AddReservation(reservation);
+            IsBusy = false;
 
             if (result is null || !result.Result)
             {

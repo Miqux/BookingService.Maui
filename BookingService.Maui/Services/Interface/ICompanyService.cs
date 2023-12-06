@@ -6,5 +6,6 @@ namespace BookingService.Maui.Services.Interface
     public interface ICompanyService
     {
         Task<ResultModel<CompanyLight?>> GetByUserId(int id);
+        Task<ResultModel<bool>> UpdateCompany(UpdateCompany model);
     }
 }
