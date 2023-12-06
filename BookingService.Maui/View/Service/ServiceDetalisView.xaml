@@ -96,12 +96,11 @@
                         </Grid.RowDefinitions>
 
                         <Label Text="Data rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" VerticalOptions="Center"/>
-                        <DatePicker x:Name ="datepicker"
-                        Date="{Binding SelectedDate}" Grid.Column="1"/>
+                        <DatePicker x:Name ="datepicker" Date="{Binding SelectedDate}" Grid.Column="1" VerticalOptions="Start"/>
 
                         <Label Text="Godzina rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" VerticalOptions="Center"/>
                         <Button Text="{Binding SelectedTime}" BackgroundColor="Transparent" TextColor="Black" FontSize="14" Grid.Row="1" Grid.Column="1"
-                        Command="{Binding ReservationTimeButtonClickCommand}" VerticalOptions="Center"/>
+                        Command="{Binding ReservationTimeButtonClickCommand}" VerticalOptions="Start"/>
 
                         <Button Text="Zarezerwuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8" Grid.Row ="2" Grid.ColumnSpan="2"
                         HeightRequest="40" Margin="0,20,0,0" Command="{Binding ReservationButtonClickCommand}"/>

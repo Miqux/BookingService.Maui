@@ -44,6 +44,7 @@ namespace BookingService.Maui.ViewModel.User
                     return;
                 }
                 await DialogService.ShowAlert("Zalogowano", "Pomyślnie zalogowano");
+                ClearNavigationStack();
                 await Shell.Current.GoToAsync(nameof(UserView));
             }
             finally

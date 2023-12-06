@@ -15,7 +15,8 @@
                        VerticalOptions="Center" HorizontalOptions="Center"
                        WidthRequest="100" HeightRequest="100"/>
         <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource NegateBooleanConverter}}">
-            <Button Text="Dodaj usługe" Command="{Binding AddServiceButtonClickCommand}" HorizontalOptions="End" WidthRequest="200" Margin="10"/>
+            <Label Text="Lista usług firmy" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" />
+            <Button Text="Dodaj usługe" Command="{Binding AddServiceButtonClickCommand}" HorizontalOptions="Center" WidthRequest="200" Margin="10"/>
             <CollectionView ItemsSource="{Binding ServicesList} "
               SelectionMode="Single"
               SelectedItem="{Binding SelectedService}"
