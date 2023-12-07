@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using BookingService.Maui.Configuration;
+using System.Globalization;
 
 namespace BookingService.Maui
 {
@@ -12,7 +13,7 @@ namespace BookingService.Maui
             var culture = new CultureInfo("pl-PL");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
-
+            Provider.ServiceProvider.GetService<NetworkConnectivity>();
             _appShell = Provider.ServiceProvider.GetService<AppShell>();
             MainPage = _appShell;
         }

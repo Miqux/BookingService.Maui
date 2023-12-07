@@ -2,7 +2,7 @@
 
 namespace BookingService.Maui.Helpers
 {
-    public class JwtAuthHandler : HttpClientHandler
+    public class HttpSendHandler : HttpClientHandler
     {
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {

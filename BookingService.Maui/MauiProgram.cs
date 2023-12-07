@@ -29,16 +29,18 @@ namespace BookingService.Maui
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-            builder.Services.AddSingleton<JwtAuthHandler>();
+            builder.Services.AddSingleton<HttpSendHandler>();
             builder.Services.AddHttpClient("BookingServiceApi", client =>
             {
-                client.BaseAddress = new Uri("https://37a4-83-6-136-251.ngrok.io/api/");
+                client.BaseAddress = new Uri("https://7b59-83-6-136-251.ngrok.io/api/");
                 //client.BaseAddress = new Uri("http://10.0.2.2:5233/api/");
-                client.Timeout = TimeSpan.FromSeconds(10);
-            }).ConfigurePrimaryHttpMessageHandler<JwtAuthHandler>();
+                client.Timeout = TimeSpan.FromSeconds(12);
+            }).ConfigurePrimaryHttpMessageHandler<HttpSendHandler>();
 
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<AppShellViewModel>();
+
+            builder.Services.AddSingleton<NetworkConnectivity>();
 
             builder.Services.AddTransient<UserView>();
             builder.Services.AddTransient<UserViewModel>();

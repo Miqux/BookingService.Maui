@@ -96,7 +96,9 @@ namespace BookingService.Maui.ViewModel.Company
                 ApartmentNumber = ApartmentNumber
             };
 
+            IsBusy = true;
             var result = await companyService.UpdateCompany(model);
+            IsBusy = false;
 
             if (!result.Result)
             {

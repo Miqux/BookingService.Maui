@@ -1,4 +1,5 @@
-﻿using BookingService.Maui.View.Company;
+﻿using BookingService.Maui.Services.Interface;
+using BookingService.Maui.View.Company;
 using BookingService.Maui.View.Service;
 using BookingService.Maui.View.User;
 using BookingService.Maui.ViewModel.App;
@@ -8,10 +9,13 @@ namespace BookingService.Maui
     public partial class AppShell : Shell
     {
         AppShellViewModel _appShellViewModel;
-        public AppShell(AppShellViewModel appShellViewModel)
+        private readonly IDialogService dialogService;
+
+        public AppShell(AppShellViewModel appShellViewModel, IDialogService dialogService)
         {
             InitializeComponent();
             _appShellViewModel = appShellViewModel;
+            this.dialogService = dialogService;
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(LoginView), typeof(LoginView));
             Routing.RegisterRoute(nameof(UserView), typeof(UserView));
@@ -21,6 +25,7 @@ namespace BookingService.Maui
             Routing.RegisterRoute(nameof(AddCompanyServiceView), typeof(AddCompanyServiceView));
             Routing.RegisterRoute(nameof(ServiceDetalisView), typeof(ServiceDetalisView));
             Routing.RegisterRoute(nameof(EditCompanyView), typeof(EditCompanyView));
+
             BindingContext = _appShellViewModel;
         }
     }
