@@ -1,5 +1,4 @@
 ﻿using BookingService.Maui.Model;
-using BookingService.Maui.Model.Reservation;
 using BookingService.Maui.Model.Service;
 using BookingService.Maui.Services.Interface;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -66,7 +65,7 @@ namespace BookingService.Maui.ViewModel.Service
             if (!int.TryParse(await SecureStorage.Default.GetAsync("userId"), out int userId))
                 return;
 
-            Reservation reservation = new()
+            Model.Reservation.Reservation reservation = new()
             {
                 UserId = userId,
                 ServiceId = ServiceId,

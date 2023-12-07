@@ -6,10 +6,12 @@ using BookingService.Maui.Repository.Repository;
 using BookingService.Maui.Services.Interface;
 using BookingService.Maui.Services.Services;
 using BookingService.Maui.View.Company;
+using BookingService.Maui.View.Reservation;
 using BookingService.Maui.View.Service;
 using BookingService.Maui.View.User;
 using BookingService.Maui.ViewModel.App;
 using BookingService.Maui.ViewModel.Company;
+using BookingService.Maui.ViewModel.Reservation;
 using BookingService.Maui.ViewModel.Service;
 using BookingService.Maui.ViewModel.User;
 using CommunityToolkit.Maui;
@@ -65,6 +67,9 @@ namespace BookingService.Maui
 
             builder.Services.AddTransient<EditCompanyView>();
             builder.Services.AddTransient<EditCompanyViewModel>();
+
+            builder.Services.AddTransient<ReservationsView>();
+            builder.Services.AddTransient<ReservationsViewModel>();
 
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
