@@ -65,10 +65,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\Reservation\CompletedReservationsView.xaml.cs">
+	    <DependentUpon>CompletedReservationsView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\Reservation\IncomingReservationsView.xaml.cs">
+	    <DependentUpon>IncomingReservationsView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="View\Company\EditCompanyView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\Reservation\ReservationsView.xaml">
+	  <MauiXaml Update="View\Reservation\IncomingReservationsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Reservation\CompletedReservationsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Service\ServiceDetalisView.xaml">

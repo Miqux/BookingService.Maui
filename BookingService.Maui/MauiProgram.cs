@@ -34,7 +34,7 @@ namespace BookingService.Maui
             builder.Services.AddSingleton<HttpSendHandler>();
             builder.Services.AddHttpClient("BookingServiceApi", client =>
             {
-                client.BaseAddress = new Uri("https://7b59-83-6-136-251.ngrok.io/api/");
+                client.BaseAddress = new Uri("https://37d9-83-6-136-251.ngrok.io/api/");
                 //client.BaseAddress = new Uri("http://10.0.2.2:5233/api/");
                 client.Timeout = TimeSpan.FromSeconds(12);
             }).ConfigurePrimaryHttpMessageHandler<HttpSendHandler>();
@@ -68,8 +68,11 @@ namespace BookingService.Maui
             builder.Services.AddTransient<EditCompanyView>();
             builder.Services.AddTransient<EditCompanyViewModel>();
 
-            builder.Services.AddTransient<ReservationsView>();
-            builder.Services.AddTransient<ReservationsViewModel>();
+            builder.Services.AddTransient<CompletedReservationsView>();
+            builder.Services.AddTransient<CompletedReservationsViewModel>();
+
+            builder.Services.AddTransient<IncomingReservationsView>();
+            builder.Services.AddTransient<IncomingReservationsViewModel>();
 
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();

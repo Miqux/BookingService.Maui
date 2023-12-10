@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.Reservation.CompletedReservationsView"
+             Title="ReservationsView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:Reservation.CompletedReservationsViewModel"
+             xmlns:local="clr-namespace:BookingService.Maui.Model.Service"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <Grid Padding="10">
+        <ActivityIndicator x:Name="activity"
+                       IsRunning="{Binding IsBusy}"
+                       Color="{DynamicResource WhiteBrush}" ZIndex="2"
+                       VerticalOptions="Center" HorizontalOptions="Center"
+                       WidthRequest="100" HeightRequest="100"/>
+        <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource NegateBooleanConverter}}">
+            <Label Text="Odbyte wizyty" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" HorizontalTextAlignment="Center"/>
+
+        </StackLayout>
+    </Grid>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+</ContentPage>

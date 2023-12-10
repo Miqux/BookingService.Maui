@@ -21,11 +21,11 @@
                 Route="MainPage" />
         </Tab>
         <Tab Icon="calendar_days_solid.svg" >
-            <ShellContent Title="   Przyszłe wizyty    " 
-                ContentTemplate="{DataTemplate view:Reservation.ReservationsView}"
-                Route="MainPage" />
             <ShellContent Title="    Odbyte wizyty    " 
-                ContentTemplate="{DataTemplate local:MainPage}"
+                ContentTemplate="{DataTemplate view:Reservation.CompletedReservationsView}"
+                Route="MainPage" />
+            <ShellContent Title="   Przyszłe wizyty    "
+                ContentTemplate="{DataTemplate view:Reservation.IncomingReservationsView}"
                 Route="MainPage" />
         </Tab>
         <Tab Icon="user_solid.svg">

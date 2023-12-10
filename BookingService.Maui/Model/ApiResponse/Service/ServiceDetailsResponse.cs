@@ -1,4 +1,4 @@
-﻿using static BookingService.Maui.Model.ApiResponse.ApiEnums;
+﻿using static BookingService.Maui.Model.Enums;
 
 namespace BookingService.Maui.Model.ApiResponse.Service
 {

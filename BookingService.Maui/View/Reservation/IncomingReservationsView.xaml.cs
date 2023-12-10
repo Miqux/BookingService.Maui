@@ -2,9 +2,9 @@ using BookingService.Maui.ViewModel.Reservation;
 
 namespace BookingService.Maui.View.Reservation;
 
-public partial class ReservationsView : ContentPage
+public partial class IncomingReservationsView : ContentPage
 {
-    public ReservationsView(ReservationsViewModel vm)
+    public IncomingReservationsView(IncomingReservationsViewModel vm)
     {
         BindingContext = vm;
         InitializeComponent();

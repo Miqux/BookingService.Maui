@@ -15,7 +15,7 @@
                        VerticalOptions="Center" HorizontalOptions="Center"
                        WidthRequest="100" HeightRequest="100"/>
         <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource NegateBooleanConverter}}">
-            <CollectionView ItemsSource="{Binding ServicesList} "
+        <CollectionView ItemsSource="{Binding ServicesList} "
           SelectionMode="Single"
           SelectedItem="{Binding SelectedService}"
           SelectionChangedCommand ="{Binding ItemSelectedCommand}" ZIndex="1">
