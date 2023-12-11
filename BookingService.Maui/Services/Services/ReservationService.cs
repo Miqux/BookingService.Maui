@@ -27,6 +27,17 @@ namespace BookingService.Maui.Services.Services
 
             return new ResultModel<int?>(true, addReservationResult.Value.Id);
         }
+
+        public async Task<ResultModel<List<CompletedReservation>>> GetCompletedReservationByUserId(int userId)
+        {
+            var services = await reservationRepository.GetCompletedReservationByUserId(userId);
+
+            if (!services.Result || services.Value is null)
+                return new ResultModel<List<CompletedReservation>>(false, services.Message, new List<CompletedReservation>());
+
+            return new ResultModel<List<CompletedReservation>>(true, mapper.Map<List<CompletedReservation>>(services.Value));
+        }
+
         public async Task<ResultModel<List<IncomingReservation>>> GetIncomingReservationByUserId(int userId)
         {
             var services = await reservationRepository.GetIncomingReservationByUserId(userId);

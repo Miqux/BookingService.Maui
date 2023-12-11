@@ -35,6 +35,7 @@ namespace BookingService.Maui.Configuration
             CreateMap<Service, AddServiceRequest>().ReverseMap();
             CreateMap<Reservation, AddReservationRequest>();
             CreateMap<IncomingReservationViewModel, IncomingReservation>();
+            CreateMap<CompletedReservationViewModel, CompletedReservation>();
         }
     }
 }

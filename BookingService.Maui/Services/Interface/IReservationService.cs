@@ -7,5 +7,6 @@ namespace BookingService.Maui.Services.Interface
     {
         public Task<ResultModel<int?>> AddReservation(Reservation model);
         public Task<ResultModel<List<IncomingReservation>>> GetIncomingReservationByUserId(int userId);
+        public Task<ResultModel<List<CompletedReservation>>> GetCompletedReservationByUserId(int userId);
     }
 }

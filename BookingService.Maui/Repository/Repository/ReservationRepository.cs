@@ -36,6 +36,29 @@ namespace BookingService.Maui.Repository.Repository
                 return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
             }
         }
+
+        public async Task<ResultModel<List<CompletedReservationViewModel>>> GetCompletedReservationByUserId(int userId)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync("Reservation/GetCompletedReservationsByUserId/" + userId.ToString());
+                if (response == null) return new ResultModel<List<CompletedReservationViewModel>>(false, "Błąd połączenia z api",
+                    new List<CompletedReservationViewModel>());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                List<CompletedReservationViewModel>? incomingReservationResponse = JsonConvert.DeserializeObject<List<CompletedReservationViewModel>>(responseData);
+
+                if (incomingReservationResponse == null)
+                    return new ResultModel<List<CompletedReservationViewModel>>(false, "Błąd wewnętrzny", new List<CompletedReservationViewModel>());
+
+                return new ResultModel<List<CompletedReservationViewModel>>(true, incomingReservationResponse);
+            }
+            catch (Exception ex)
+            {
+                return new ResultModel<List<CompletedReservationViewModel>>(false, "Błąd wewnętrzny", new List<CompletedReservationViewModel>());
+            }
+        }
+
         public async Task<ResultModel<List<IncomingReservationViewModel>>> GetIncomingReservationByUserId(int userId)
         {
             try

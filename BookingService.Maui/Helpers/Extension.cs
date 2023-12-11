@@ -16,29 +16,29 @@ namespace BookingService.Maui.Helpers
         public static string GetDescription(this Enum value)
         {
             Type type = value.GetType();
-            string name = Enum.GetName(type, value);
+            string? name = Enum.GetName(type, value);
 
             if (name != null)
             {
-                FieldInfo field = type.GetField(name);
+                FieldInfo? field = type.GetField(name);
                 if (field != null && Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attribute)
                     return attribute.Description;
             }
 
-            return name;
+            return name ?? "";
         }
         public static List<IdName> GetListFromEnum<TEnum>() where TEnum : Enum
         {
-            List<IdName> toReturn = new();
-
             foreach (TEnum enumValue in Enum.GetValues(typeof(TEnum)))
             {
-                IdName idName = new();
-                idName.Name = enumValue.GetDescription();
-                idName.Id = Convert.ToInt32(enumValue);
-                toReturn.Add(idName);
+                IdName idName = new()
+                {
+                    Name = enumValue.GetDescription(),
+                    Id = Convert.ToInt32(enumValue)
+                };
+                new List<IdName>().Add(idName);
             }
-            return toReturn;
+            return new List<IdName>();
         }
     }
 }
