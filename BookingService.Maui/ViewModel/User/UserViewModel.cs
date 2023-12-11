@@ -32,7 +32,7 @@ namespace BookingService.Maui.ViewModel.User
 
         #endregion
 
-        private CompanyLight companyValue;
+        private CompanyLight? companyValue;
         private int companyId;
 
         private readonly IAddressService addressService;

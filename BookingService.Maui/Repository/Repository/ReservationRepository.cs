@@ -53,7 +53,7 @@ namespace BookingService.Maui.Repository.Repository
 
                 return new ResultModel<List<CompletedReservationViewModel>>(true, incomingReservationResponse);
             }
-            catch (Exception ex)
+            catch
             {
                 return new ResultModel<List<CompletedReservationViewModel>>(false, "Błąd wewnętrzny", new List<CompletedReservationViewModel>());
             }
@@ -75,7 +75,7 @@ namespace BookingService.Maui.Repository.Repository
 
                 return new ResultModel<List<IncomingReservationViewModel>>(true, incomingReservationResponse);
             }
-            catch (Exception ex)
+            catch
             {
                 return new ResultModel<List<IncomingReservationViewModel>>(false, "Błąd wewnętrzny", new List<IncomingReservationViewModel>());
             }

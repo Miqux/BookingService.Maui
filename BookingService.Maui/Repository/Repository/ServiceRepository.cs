@@ -48,7 +48,7 @@ namespace BookingService.Maui.Repository.Repository
 
                 return new ResultModel<List<ServicesLightResponse>>(true, servicesResponse);
             }
-            catch (Exception ex)
+            catch
             {
                 return new ResultModel<List<ServicesLightResponse>>(false, "Błąd wewnętrzny", new List<ServicesLightResponse>());
             }
@@ -147,7 +147,7 @@ namespace BookingService.Maui.Repository.Repository
 
                 return new ResultModel<List<PossibleServiceHourResponse>>(true, servicesResponse);
             }
-            catch (Exception ex)
+            catch
             {
                 return new ResultModel<List<PossibleServiceHourResponse>>(false, "Błąd wewnętrzny", new List<PossibleServiceHourResponse>());
             }
