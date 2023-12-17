@@ -12,7 +12,7 @@
     <TabBar>
         <Tab Icon="house_solid.svg">
             <ShellContent Title="Strona główna" 
-                ContentTemplate="{DataTemplate local:MainPage}"
+                ContentTemplate="{DataTemplate view:Main.MainView}"
                 Route="MainPage" />
         </Tab>
         <Tab Icon="magnifying_glass_solid.svg">

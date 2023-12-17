@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.Administration.AddPostView"
+             Title="AddPostView"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:Administration.AddPostViewModel"
+             xmlns:local="clr-namespace:BookingService.Maui.Model.User"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand">
+
+        <Label Text="Dodawanie postu" FontSize="32" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center"/>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Entry Placeholder="Tytuł" FontSize="16" HeightRequest="40" Text="{Binding Title}"/>
+        </Frame>
+
+        <Frame BackgroundColor="White" CornerRadius="8" Padding="10" Margin="0,0,0,10">
+            <Editor Placeholder="Treść" FontSize="16" HeightRequest="120" Text="{Binding Content}" />
+        </Frame>
+        
+        <Button Text="Dodaj post" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                HeightRequest="50" Margin="0,0,0,10" Command="{Binding AddPostButtonClickCommand}"/>
+        
+    </StackLayout>
+</ContentPage>

@@ -120,6 +120,12 @@ namespace BookingService.Maui.ViewModel.User
             await Shell.Current.GoToAsync(nameof(UsersView));
         }
 
+        [RelayCommand]
+        private async Task AddPostButtonClick()
+        {
+            await Shell.Current.GoToAsync(nameof(AddPostView));
+        }
+
         private async Task InitUser()
         {
             string userId = await SecureStorage.Default.GetAsync("userId");

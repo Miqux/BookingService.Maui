@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BookingService.Maui.View.Main.MainView"
+             Title="MainView"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
+             x:DataType="viewmodel:Main.MainViewModel"
+             xmlns:local="clr-namespace:BookingService.Maui.Model.Post"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <Grid Padding="10">
+        <ActivityIndicator x:Name="activity"
+                IsRunning="{Binding IsBusy}"
+                Color="{DynamicResource WhiteBrush}" ZIndex="2"
+                VerticalOptions="Center" HorizontalOptions="Center"
+                WidthRequest="100" HeightRequest="100"/>
+        <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource NegateBooleanConverter}}">
+            <Label Text="Aktualności" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center"/>
+
+            <CollectionView ItemsSource="{Binding PostList} "
+               SelectionMode="None"
+               VerticalOptions="FillAndExpand"
+               ZIndex="1"> 
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Post">
+                        <Border Stroke="Black" StrokeThickness="4" Margin="5" >
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="20,20,20,20" />
+                            </Border.StrokeShape>
+
+                            <Grid BackgroundColor="White" Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label 
+                             Text="{Binding Title}" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}" />
+                                <Label 
+                             Text="{Binding Content}" FontSize="16" TextColor="Gray" Grid.Row="1" />
+                                <Label 
+                             Text="{Binding CreatedDate}" FontSize="8" TextColor="Gray" Grid.Row="2" />
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </Grid>
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}" EventName="Appearing" />
+    </ContentPage.Behaviors>
+</ContentPage>

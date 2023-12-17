@@ -3,16 +3,19 @@ using BookingService.Maui.Model;
 using BookingService.Maui.Model.Address;
 using BookingService.Maui.Model.ApiRequest;
 using BookingService.Maui.Model.ApiRequest.Company;
+using BookingService.Maui.Model.ApiRequest.Post;
 using BookingService.Maui.Model.ApiRequest.Reservation;
 using BookingService.Maui.Model.ApiRequest.Service;
 using BookingService.Maui.Model.ApiRequest.User;
 using BookingService.Maui.Model.ApiResponse;
 using BookingService.Maui.Model.ApiResponse.Address;
 using BookingService.Maui.Model.ApiResponse.Company;
+using BookingService.Maui.Model.ApiResponse.Post;
 using BookingService.Maui.Model.ApiResponse.Reservation;
 using BookingService.Maui.Model.ApiResponse.Service;
 using BookingService.Maui.Model.ApiResponse.User;
 using BookingService.Maui.Model.Company;
+using BookingService.Maui.Model.Post;
 using BookingService.Maui.Model.Reservation;
 using BookingService.Maui.Model.Service;
 using BookingService.Maui.Model.User;
@@ -40,6 +43,9 @@ namespace BookingService.Maui.Configuration
             CreateMap<Reservation, AddReservationRequest>();
             CreateMap<IncomingReservationViewModel, IncomingReservation>();
             CreateMap<CompletedReservationViewModel, CompletedReservation>();
+            CreateMap<CompletedReservationViewModel, CompletedReservation>();
+            CreateMap<Post, AddPostRequest>();
+            CreateMap<PostViewModel, Post>();
         }
     }
 }

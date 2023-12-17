@@ -7,12 +7,14 @@ using BookingService.Maui.Services.Interface;
 using BookingService.Maui.Services.Services;
 using BookingService.Maui.View.Administration;
 using BookingService.Maui.View.Company;
+using BookingService.Maui.View.Main;
 using BookingService.Maui.View.Reservation;
 using BookingService.Maui.View.Service;
 using BookingService.Maui.View.User;
 using BookingService.Maui.ViewModel.Administration;
 using BookingService.Maui.ViewModel.App;
 using BookingService.Maui.ViewModel.Company;
+using BookingService.Maui.ViewModel.Main;
 using BookingService.Maui.ViewModel.Reservation;
 using BookingService.Maui.ViewModel.Service;
 using BookingService.Maui.ViewModel.User;
@@ -36,7 +38,7 @@ namespace BookingService.Maui
             builder.Services.AddSingleton<HttpSendHandler>();
             builder.Services.AddHttpClient("BookingServiceApi", client =>
             {
-                client.BaseAddress = new Uri("https://8b86-83-6-143-213.ngrok.io/api/");
+                client.BaseAddress = new Uri("https://bf20-83-6-143-213.ngrok.io/api/");
                 //client.BaseAddress = new Uri("http://10.0.2.2:5233/api/");
                 client.Timeout = TimeSpan.FromSeconds(12);
             }).ConfigurePrimaryHttpMessageHandler<HttpSendHandler>();
@@ -79,11 +81,18 @@ namespace BookingService.Maui
             builder.Services.AddTransient<UsersView>();
             builder.Services.AddTransient<UsersViewModel>();
 
+            builder.Services.AddTransient<MainView>();
+            builder.Services.AddTransient<MainViewModel>();
+
+            builder.Services.AddTransient<AddPostView>();
+            builder.Services.AddTransient<AddPostViewModel>();
+
             builder.Services.AddScoped<IAddressRepository, AddressRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
             builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
             builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+            builder.Services.AddScoped<IPostRepository, PostRepository>();
 
             builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
@@ -91,6 +100,7 @@ namespace BookingService.Maui
             builder.Services.AddScoped<IServiceService, ServiceService>();
             builder.Services.AddScoped<ICompanyService, CompanyService>();
             builder.Services.AddScoped<IReservationService, ReservationService>();
+            builder.Services.AddScoped<IPostService, PostService>();
 
             SecureStorage.Default.RemoveAll();
 
