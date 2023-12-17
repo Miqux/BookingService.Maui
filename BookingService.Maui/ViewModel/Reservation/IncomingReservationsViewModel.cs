@@ -35,7 +35,40 @@ namespace BookingService.Maui.ViewModel.Reservation
         [RelayCommand]
         private async Task ItemSelected()
         {
+            if (SelectedReservation is null)
+                return;
 
+            List<string> options = new()
+            {
+                "Odwołaj"
+            };
+            string selectedOption = await DialogService.ShowOptionsDialog("Wybierz opcje", options);
+
+            if (selectedOption == null)
+                return;
+
+            switch (selectedOption)
+            {
+                case "Odwołaj":
+                    {
+                        await DeleteReservation(SelectedReservation.Id);
+                    }
+                    break;
+            }
+        }
+
+        private async Task DeleteReservation(int id)
+        {
+            var result = await reservationService.DeleteReservation(id);
+
+            if (!result.Result)
+            {
+                await DialogService.ShowAlert("Niepowodzenie", "Nie udało się usunąć rezerwacji");
+                return;
+            }
+
+            await DialogService.ShowAlert("Powodzenie", "Usunięto rezerwację");
+            await Appearing();
         }
 
         public async Task InitalizeData()

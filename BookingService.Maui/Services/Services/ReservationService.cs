@@ -28,6 +28,16 @@ namespace BookingService.Maui.Services.Services
             return new ResultModel<int?>(true, addReservationResult.Value.Id);
         }
 
+        public async Task<ResultModel<bool>> DeleteReservation(int id)
+        {
+            var deleteReservationResponse = await reservationRepository.DeleteReservation(id);
+
+            if (!deleteReservationResponse.Result)
+                return new ResultModel<bool>(false, deleteReservationResponse.Message, false);
+
+            return new ResultModel<bool>(true, true);
+        }
+
         public async Task<ResultModel<List<CompletedReservation>>> GetCompletedReservationByUserId(int userId)
         {
             var services = await reservationRepository.GetCompletedReservationByUserId(userId);

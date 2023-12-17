@@ -22,11 +22,10 @@
             </StackLayout>
 
             <CollectionView ItemsSource="{Binding ReservationList} "
-      SelectionMode="Single"
-      SelectedItem="{Binding SelectedReservation}"
+      SelectionMode="None"
       VerticalOptions="FillAndExpand"
       IsVisible="{Binding IsLogged}"
-      SelectionChangedCommand ="{Binding ItemSelectedCommand}" ZIndex="1">
+      ZIndex="1">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:CompletedReservation">
                         <Border Stroke="Black" StrokeThickness="4" Margin="5" >

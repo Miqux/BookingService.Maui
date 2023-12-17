@@ -37,6 +37,33 @@ namespace BookingService.Maui.Repository.Repository
             }
         }
 
+        public async Task<ResultModel<BaseCommandResponse>> DeleteReservation(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.DeleteAsync("Reservation/" + id.ToString());
+                if (response == null) return new ResultModel<BaseCommandResponse>(false, "Błąd połączenia z api", new BaseCommandResponse());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                BaseCommandResponse? deleteResponse = JsonConvert.DeserializeObject<BaseCommandResponse>(responseData);
+
+                if (deleteResponse == null)
+                    return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
+
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    return new ResultModel<BaseCommandResponse>(false, deleteResponse.Message ?? string.Empty, deleteResponse);
+
+                if (!response.IsSuccessStatusCode)
+                    return new ResultModel<BaseCommandResponse>(false, deleteResponse.Message ?? string.Empty, deleteResponse);
+
+                return new ResultModel<BaseCommandResponse>(true, "Pomyślnie usunięto rezerwacje", deleteResponse);
+            }
+            catch
+            {
+                return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
+            }
+        }
+
         public async Task<ResultModel<List<CompletedReservationViewModel>>> GetCompletedReservationByUserId(int userId)
         {
             try

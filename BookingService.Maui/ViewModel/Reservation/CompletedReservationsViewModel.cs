@@ -12,9 +12,6 @@ namespace BookingService.Maui.ViewModel.Reservation
         private ObservableCollection<CompletedReservation>? reservationList;
 
         [ObservableProperty]
-        IncomingReservation? selectedReservation;
-
-        [ObservableProperty]
         bool isLogged;
 
         private readonly IReservationService reservationService;
@@ -30,12 +27,6 @@ namespace BookingService.Maui.ViewModel.Reservation
             IsBusy = true;
             await InitalizeData();
             IsBusy = false;
-        }
-
-        [RelayCommand]
-        private async Task ItemSelected()
-        {
-
         }
 
         public async Task InitalizeData()
