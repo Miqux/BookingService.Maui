@@ -1,10 +1,10 @@
 ﻿using BookingService.Maui.Services.Interface;
+using BookingService.Maui.View.Administration;
 using BookingService.Maui.View.Company;
 using BookingService.Maui.View.Reservation;
 using BookingService.Maui.View.Service;
 using BookingService.Maui.View.User;
 using BookingService.Maui.ViewModel.App;
-using BookingService.Maui.ViewModel.Reservation;
 
 namespace BookingService.Maui
 {
@@ -28,7 +28,8 @@ namespace BookingService.Maui
             Routing.RegisterRoute(nameof(ServiceDetalisView), typeof(ServiceDetalisView));
             Routing.RegisterRoute(nameof(EditCompanyView), typeof(EditCompanyView));
             Routing.RegisterRoute(nameof(CompletedReservationsView), typeof(CompletedReservationsView));
-            Routing.RegisterRoute(nameof(IncomingReservationsView), typeof(IncomingReservationsViewModel));
+            Routing.RegisterRoute(nameof(IncomingReservationsView), typeof(IncomingReservationsView));
+            Routing.RegisterRoute(nameof(UsersView), typeof(UsersView));
 
             BindingContext = _appShellViewModel;
         }

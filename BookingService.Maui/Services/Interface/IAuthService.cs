@@ -11,5 +11,7 @@ namespace BookingService.Maui.Services.Interface
         public Task<User?> GetUserById(int id);
         public void Logout();
         public Task<ResultModel<bool>> Register(RegisterUser model);
+        public Task<ResultModel<List<UserAdministration>>> GetUserAdministration();
+        public Task<ResultModel<bool>> UpdateUserRole(UpdateUserRole model);
     }
 }

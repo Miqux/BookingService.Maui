@@ -1,6 +1,8 @@
 ﻿using BookingService.Maui.Model;
 using BookingService.Maui.Model.ApiRequest;
+using BookingService.Maui.Model.ApiRequest.User;
 using BookingService.Maui.Model.ApiResponse;
+using BookingService.Maui.Model.ApiResponse.User;
 using BookingService.Maui.Repository.Interface;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
@@ -12,6 +14,28 @@ namespace BookingService.Maui.Repository.Repository
         public UserRepository()
         {
 
+        }
+
+        public async Task<ResultModel<List<UserAdministrationResponse>>> GetUserAdministration()
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync("User/GetUserAdministration");
+                if (response == null) return new ResultModel<List<UserAdministrationResponse>>(false, "Błąd połączenia z api",
+                    new List<UserAdministrationResponse>());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                List<UserAdministrationResponse>? userAdministrationResponse = JsonConvert.DeserializeObject<List<UserAdministrationResponse>>(responseData);
+
+                if (userAdministrationResponse == null)
+                    return new ResultModel<List<UserAdministrationResponse>>(false, "Błąd wewnętrzny", new List<UserAdministrationResponse>());
+
+                return new ResultModel<List<UserAdministrationResponse>>(true, userAdministrationResponse);
+            }
+            catch
+            {
+                return new ResultModel<List<UserAdministrationResponse>>(false, "Błąd wewnętrzny", new List<UserAdministrationResponse>());
+            }
         }
 
         public async Task<ResultModel<UserResponse>> GetUserByIdAsync(int id)
@@ -74,6 +98,33 @@ namespace BookingService.Maui.Repository.Repository
                     return new ResultModel<BaseCommandResponse>(false, registeryResponse.Message ?? string.Empty, registeryResponse);
 
                 return new ResultModel<BaseCommandResponse>(true, "Pomyślnie zarejestrowano", registeryResponse);
+            }
+            catch
+            {
+                return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
+            }
+        }
+
+        public async Task<ResultModel<BaseCommandResponse>> UpdateUserRole(UpdateUserRoleRequest model)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.PutAsJsonAsync("User/UpdateUserRole", model);
+                if (response == null) return new ResultModel<BaseCommandResponse>(false, "Błąd połączenia z api", new BaseCommandResponse());
+
+                var responseData = await response.Content.ReadAsStringAsync();
+                BaseCommandResponse? updateUserRoleResponse = JsonConvert.DeserializeObject<BaseCommandResponse>(responseData);
+
+                if (updateUserRoleResponse == null)
+                    return new ResultModel<BaseCommandResponse>(false, "Błąd wewnętrzny", new BaseCommandResponse());
+
+                if (response.StatusCode == System.Net.HttpStatusCode.UnprocessableEntity)
+                    return new ResultModel<BaseCommandResponse>(false, updateUserRoleResponse.Message ?? string.Empty, updateUserRoleResponse);
+
+                if (!response.IsSuccessStatusCode)
+                    return new ResultModel<BaseCommandResponse>(false, updateUserRoleResponse.Message ?? string.Empty, updateUserRoleResponse);
+
+                return new ResultModel<BaseCommandResponse>(true, "Pomyślnie zaaktualizowano użytkownika", updateUserRoleResponse);
             }
             catch
             {

@@ -1,6 +1,8 @@
-﻿using BookingService.Maui.Model.Address;
+﻿using BookingService.Maui.Model;
+using BookingService.Maui.Model.Address;
 using BookingService.Maui.Model.Company;
 using BookingService.Maui.Services.Interface;
+using BookingService.Maui.View.Administration;
 using BookingService.Maui.View.Company;
 using BookingService.Maui.View.User;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -25,6 +27,8 @@ namespace BookingService.Maui.ViewModel.User
 
         [ObservableProperty]
         bool isCompany;
+        [ObservableProperty]
+        bool isAdmin;
         [ObservableProperty]
         string companyName = string.Empty;
         [ObservableProperty]
@@ -110,6 +114,12 @@ namespace BookingService.Maui.ViewModel.User
             await Shell.Current.GoToAsync(nameof(EditCompanyView), temp);
         }
 
+        [RelayCommand]
+        private async Task UsersButtonClick()
+        {
+            await Shell.Current.GoToAsync(nameof(UsersView));
+        }
+
         private async Task InitUser()
         {
             string userId = await SecureStorage.Default.GetAsync("userId");
@@ -123,6 +133,11 @@ namespace BookingService.Maui.ViewModel.User
             LastName = user.LastName;
             Login = user.Login;
             Email = user.Email;
+
+            string userRole = await SecureStorage.Default.GetAsync("actoreRole");
+
+            if (userRole is not null && userRole == Enums.UserRole.Admin.ToString())
+                IsAdmin = true;
         }
 
         private async Task InitCompany()

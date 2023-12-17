@@ -69,7 +69,7 @@
 
             <!-- Sekcja "Dane firmy" -->
             <Frame IsVisible="{Binding IsCompany}"
-     BackgroundColor="White" CornerRadius="8" Padding="20">
+                BackgroundColor="White" CornerRadius="8" Padding="20">
                 <StackLayout>
 
                     <Label Text="Dane firmy" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
@@ -114,6 +114,19 @@
 
                     <Button Text="Edytuj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
                         HeightRequest="50" Margin="0,20,0,0" Command="{Binding EditCompanyButtonClickCommand}"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Sekcja "Administracja" -->
+            <Frame IsVisible="{Binding IsAdmin}"
+                BackgroundColor="White" CornerRadius="8" Padding="20">
+                <StackLayout>
+
+                    <Label Text="Administracja" FontSize="28" FontAttributes="Bold" TextColor="{DynamicResource PrimaryColor}"/>
+                    
+                    <Button Text="Użytkownicy" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8"
+                        HeightRequest="50" Margin="0,20,0,0" Command="{Binding UsersButtonClickCommand}"/>
+
                 </StackLayout>
             </Frame>
         </StackLayout>

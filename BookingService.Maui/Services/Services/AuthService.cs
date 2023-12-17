@@ -2,6 +2,7 @@
 using BookingService.Maui.Helpers;
 using BookingService.Maui.Model;
 using BookingService.Maui.Model.ApiRequest;
+using BookingService.Maui.Model.ApiRequest.User;
 using BookingService.Maui.Model.ApiResponse;
 using BookingService.Maui.Model.User;
 using BookingService.Maui.Repository.Interface;
@@ -75,6 +76,25 @@ namespace BookingService.Maui.Services.Services
 
             if (!registerResult.Result)
                 return new ResultModel<bool>(false, registerResult.Message, false);
+
+            return new ResultModel<bool>(true, true);
+        }
+        public async Task<ResultModel<List<UserAdministration>>> GetUserAdministration()
+        {
+            var users = await userRepository.GetUserAdministration();
+
+            if (!users.Result || users.Value is null)
+                return new ResultModel<List<UserAdministration>>(false, users.Message, new List<UserAdministration>());
+
+            return new ResultModel<List<UserAdministration>>(true, mapper.Map<List<UserAdministration>>(users.Value));
+        }
+        public async Task<ResultModel<bool>> UpdateUserRole(UpdateUserRole model)
+        {
+            var updateUserModel = mapper.Map<UpdateUserRoleRequest>(model);
+            var updateUserResponse = await userRepository.UpdateUserRole(updateUserModel);
+
+            if (!updateUserResponse.Result)
+                return new ResultModel<bool>(false, updateUserResponse.Message, false);
 
             return new ResultModel<bool>(true, true);
         }
