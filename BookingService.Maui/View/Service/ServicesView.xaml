@@ -7,15 +7,46 @@
              xmlns:viewmodel="clr-namespace:BookingService.Maui.ViewModel"
              x:DataType="viewmodel:Service.ServicesViewModel"
              xmlns:local="clr-namespace:BookingService.Maui.Model.Service"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
-    <Grid Padding="10">
+    <Grid Padding="10">     
+        
         <ActivityIndicator x:Name="activity"
                        IsRunning="{Binding IsBusy}"
                        Color="{DynamicResource WhiteBrush}" ZIndex="2"
                        VerticalOptions="Center" HorizontalOptions="Center"
                        WidthRequest="100" HeightRequest="100"/>
         <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource NegateBooleanConverter}}">
-        <CollectionView ItemsSource="{Binding ServicesList} "
+            <Frame BackgroundColor="White" CornerRadius="8" Padding="20">
+                <StackLayout>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="Data rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" VerticalOptions="Center"/>
+                        <Entry Placeholder="Miasto" FontSize="16" HeightRequest="40" Text="{Binding City}" Grid.Column="1" VerticalOptions="Start"/>
+
+                        <Label Text="Typ usługi:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" VerticalOptions="Center"/>
+                        <controls:Picker SelectedItem="{Binding Type, Mode=TwoWay}" ItemsSource="{Binding Types}" Grid.Row="1" Grid.Column="1" VerticalOptions="Start">
+                            <Picker.ItemDisplayBinding>
+                                <Binding Path="Name" />
+                            </Picker.ItemDisplayBinding>
+                        </controls:Picker>
+
+                        <Button Text="Filtruj" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" FontSize="18" CornerRadius="8" Grid.Row ="2" Grid.ColumnSpan="2"
+                 HeightRequest="40" Margin="0,20,0,0" Command="{Binding FilterButtonClickCommand}"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+            <CollectionView ItemsSource="{Binding ServicesList} "
           SelectionMode="Single"
           SelectedItem="{Binding SelectedService}"
           SelectionChangedCommand ="{Binding ItemSelectedCommand}" ZIndex="1">

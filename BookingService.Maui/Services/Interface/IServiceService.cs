@@ -5,7 +5,7 @@ namespace BookingService.Maui.Services.Interface
 {
     public interface IServiceService
     {
-        public Task<ResultModel<List<ServiceLight>>> GetServiceLight();
+        public Task<ResultModel<List<ServiceLight>>> GetServiceLight(int? serviceType, string? city);
         public Task<ResultModel<List<CompanyService>>> GetCompanyServices(int comapnyId);
         public Task<ResultModel<int?>> AddService(Service model);
         public Task<ResultModel<bool>> DeleteService(int id);

@@ -29,6 +29,7 @@ namespace BookingService.Maui.Helpers
         }
         public static List<IdName> GetListFromEnum<TEnum>() where TEnum : Enum
         {
+            var list = new List<IdName>();
             foreach (TEnum enumValue in Enum.GetValues(typeof(TEnum)))
             {
                 IdName idName = new()
@@ -36,9 +37,9 @@ namespace BookingService.Maui.Helpers
                     Name = enumValue.GetDescription(),
                     Id = Convert.ToInt32(enumValue)
                 };
-                new List<IdName>().Add(idName);
+                list.Add(idName);
             }
-            return new List<IdName>();
+            return list;
         }
     }
 }

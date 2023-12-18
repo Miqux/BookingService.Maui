@@ -18,9 +18,9 @@ namespace BookingService.Maui.Services.Services
             this.mapper = mapper;
         }
 
-        public async Task<ResultModel<List<ServiceLight>>> GetServiceLight()
+        public async Task<ResultModel<List<ServiceLight>>> GetServiceLight(int? serviceType, string? city)
         {
-            var services = await serviceRepository.GetServicesLight();
+            var services = await serviceRepository.GetServicesLight(serviceType, city);
 
             if (!services.Result || services.Value is null)
                 return new ResultModel<List<ServiceLight>>(false, services.Message, new List<ServiceLight>());

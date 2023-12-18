@@ -32,11 +32,16 @@ namespace BookingService.Maui.Repository.Repository
             }
         }
 
-        public async Task<ResultModel<List<ServicesLightResponse>>> GetServicesLight()
+        public async Task<ResultModel<List<ServicesLightResponse>>> GetServicesLight(int? serviceType, string? city)
         {
             try
             {
-                HttpResponseMessage response = await HttpClient.GetAsync("Service/GetLightModels");
+                string url = "Service/GetLightModels";
+                url += serviceType is not null || city is not null ? "?" : "";
+                url += serviceType is null ? "" : "serviceType=" + serviceType;
+                url += serviceType is not null ? "&" : "";
+                url += city is null ? "" : "city=" + city;
+                HttpResponseMessage response = await HttpClient.GetAsync(url);
                 if (response == null) return new ResultModel<List<ServicesLightResponse>>(false, "Błąd połączenia z api",
                     new List<ServicesLightResponse>());
 
