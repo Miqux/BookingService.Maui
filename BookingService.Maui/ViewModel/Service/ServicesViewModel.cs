@@ -47,7 +47,7 @@ namespace BookingService.Maui.ViewModel.Service
         }
         public async Task InitializeData()
         {
-            Type = Types.FirstOrDefault(x => x.Id == 0);
+            Type = Types.First(x => x.Id == 0);
             var services = await serviceService.GetServiceLight(null, null);
             ServicesList = new ObservableCollection<ServiceLight>(services.Value);
         }
@@ -68,7 +68,7 @@ namespace BookingService.Maui.ViewModel.Service
         private async Task FilterButtonClick()
         {
             IsBusy = true;
-            var services = await serviceService.GetServiceLight(Type.Id == 0 ? null : Type.Id, city);
+            var services = await serviceService.GetServiceLight(Type.Id == 0 ? null : Type.Id, City);
             ServicesList = new ObservableCollection<ServiceLight>(services.Value);
             IsBusy = false;
         }

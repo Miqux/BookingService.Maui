@@ -9,7 +9,10 @@ namespace BookingService.Maui
         public App()
         {
             InitializeComponent();
-            Application.Current.UserAppTheme = AppTheme.Light;
+
+            if (Application.Current is not null)
+                Application.Current.UserAppTheme = AppTheme.Light;
+
             var culture = new CultureInfo("pl-PL");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
