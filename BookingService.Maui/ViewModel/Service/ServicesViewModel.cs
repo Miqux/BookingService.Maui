@@ -12,7 +12,7 @@ namespace BookingService.Maui.ViewModel.Service
     public partial class ServicesViewModel : BaseViewModel
     {
         [ObservableProperty]
-        private ObservableCollection<ServiceLight> servicesList;
+        ObservableCollection<ServiceLight> servicesList;
 
         [ObservableProperty]
         ServiceLight selectedService = new();
@@ -63,7 +63,6 @@ namespace BookingService.Maui.ViewModel.Service
             };
             await Shell.Current.GoToAsync(nameof(ServiceDetalisView), temp);
         }
-
         [RelayCommand]
         private async Task FilterButtonClick()
         {
