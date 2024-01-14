@@ -72,6 +72,7 @@ namespace BookingService.Maui.ViewModel.User
                 await DialogService.ShowAlert("Błąd", result.Message);
                 return;
             }
+            await DialogService.ShowAlert("Pomyślnie", "Pomyślnie dodano usługę");
             await Shell.Current.Navigation.PopAsync();
         }
     }

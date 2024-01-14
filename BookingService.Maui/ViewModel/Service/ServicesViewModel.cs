@@ -45,12 +45,6 @@ namespace BookingService.Maui.ViewModel.Service
             await InitializeData();
             IsBusy = false;
         }
-        public async Task InitializeData()
-        {
-            Type = Types.First(x => x.Id == 0);
-            var services = await serviceService.GetServiceLight(null, null);
-            ServicesList = new ObservableCollection<ServiceLight>(services.Value);
-        }
         [RelayCommand]
         private async Task ItemSelected()
         {
@@ -70,6 +64,12 @@ namespace BookingService.Maui.ViewModel.Service
             var services = await serviceService.GetServiceLight(Type.Id == 0 ? null : Type.Id, City);
             ServicesList = new ObservableCollection<ServiceLight>(services.Value);
             IsBusy = false;
+        }
+        private async Task InitializeData()
+        {
+            Type = Types.First(x => x.Id == 0);
+            var services = await serviceService.GetServiceLight(null, null);
+            ServicesList = new ObservableCollection<ServiceLight>(services.Value);
         }
     }
 }
