@@ -38,7 +38,7 @@ namespace BookingService.Maui
             builder.Services.AddSingleton<HttpSendHandler>();
             builder.Services.AddHttpClient("BookingServiceApi", client =>
             {
-                client.BaseAddress = new Uri("https://8bd4-83-5-193-172.ngrok-free.app/api/");
+                client.BaseAddress = new Uri("https://booking-service-api.azurewebsites.net/api/");
                 //client.BaseAddress = new Uri("http://10.0.2.2:5233/api/");
                 client.Timeout = TimeSpan.FromSeconds(12);
             }).ConfigurePrimaryHttpMessageHandler<HttpSendHandler>();
