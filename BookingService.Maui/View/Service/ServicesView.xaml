@@ -31,7 +31,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Label Text="Data rezerwacji:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" VerticalOptions="Center"/>
+                        <Label Text="Miasto:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" VerticalOptions="Center"/>
                         <Entry Placeholder="Miasto" FontSize="16" HeightRequest="40" Text="{Binding City}" Grid.Column="1" VerticalOptions="Start"/>
 
                         <Label Text="Typ usługi:" FontSize="14" TextColor="{DynamicResource PrimaryColor}" Grid.Row="1" VerticalOptions="Center"/>
